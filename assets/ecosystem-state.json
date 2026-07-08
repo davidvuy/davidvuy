@@ -1,70 +1,360 @@
 {
   "signals": {
-    "owner": "david",
-    "generated_at": "2026-07-08T17:06:02.524044+00:00",
+    "owner": "davidvuy",
+    "generated_at": "2026-07-08T20:35:53.514859+00:00",
     "repos": [
       {
-        "name": "ai-profile-ecosystem",
+        "name": "davidvuy",
         "language": "Python",
-        "stars": 12,
-        "forks": 1,
-        "open_issues": 1,
-        "pushed_at": "2026-07-08T17:06:02.524044+00:00",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_at": "2026-07-08T20:35:41Z",
         "archived": false
       },
       {
-        "name": "github-identity-lab",
+        "name": "ai-app-care-os",
         "language": "TypeScript",
-        "stars": 8,
+        "stars": 0,
         "forks": 0,
         "open_issues": 0,
-        "pushed_at": "2026-07-08T17:06:02.524044+00:00",
+        "pushed_at": "2026-06-02T19:58:10Z",
         "archived": false
       },
       {
-        "name": "visual-systems",
-        "language": "CSS",
-        "stars": 5,
+        "name": "mortydex-explorer-restart",
+        "language": "JavaScript",
+        "stars": 0,
         "forks": 0,
         "open_issues": 0,
-        "pushed_at": "2026-07-08T17:06:02.524044+00:00",
+        "pushed_at": "2026-05-24T23:01:06Z",
         "archived": false
       }
     ],
     "events": [
       {
         "type": "PushEvent",
-        "repo": "ai-profile-ecosystem",
-        "created_at": "2026-07-08T17:06:02.524044+00:00"
+        "repo": "davidvuy",
+        "created_at": "2026-07-08T20:35:42Z"
       },
       {
-        "type": "IssuesEvent",
-        "repo": "github-identity-lab",
-        "created_at": "2026-07-08T17:06:02.524044+00:00"
+        "type": "CreateEvent",
+        "repo": "davidvuy",
+        "created_at": "2026-07-08T20:34:53Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-22T01:00:58Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-22T00:53:31Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-22T00:39:40Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-22T00:18:57Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-22T00:12:04Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T23:40:19Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T23:26:36Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T23:02:07Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T23:00:03Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:58:34Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:52:50Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:50:17Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:47:55Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:46:14Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:40:31Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:37:21Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:31:14Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:29:32Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:23:49Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:22:03Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:20:29Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:13:41Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:12:44Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:10:43Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:05:06Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T22:02:43Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:51:56Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:41:04Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:39:49Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:33:39Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:29:22Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:26:13Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T21:12:27Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T20:55:18Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:50:29Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:50:27Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:48:03Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:31:01Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:30:59Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:23:34Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:23:32Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:12:12Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T17:12:11Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:47:22Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:47:20Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:45:44Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:30:02Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:30:00Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:25:11Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:25:09Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:14:34Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:14:32Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:11:09Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:11:07Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:09:00Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:08:58Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:03:14Z"
+      },
+      {
+        "type": "PushEvent",
+        "repo": "programming_project_group_1",
+        "created_at": "2026-06-21T16:03:11Z"
       }
     ],
     "workflow": {
-      "successes": 4,
-      "failures": 0
+      "successes": 0,
+      "failures": 1
     }
   },
   "state": {
-    "mood": "focused",
-    "weather": "soft static",
+    "mood": "stormy",
+    "weather": "digital rain",
     "palette": [
-      "#18181b",
-      "#4f46e5",
-      "#06b6d4",
-      "#f8fafc"
+      "#111827",
+      "#7f1d1d",
+      "#f97316",
+      "#fef3c7"
     ],
-    "activity": 24,
-    "pressure": 12,
-    "health": 80,
+    "activity": 100,
+    "pressure": 18,
+    "health": 100,
     "top_languages": [
       "Python",
       "TypeScript",
-      "CSS"
+      "JavaScript"
     ],
-    "narrative": "david is in a focused cycle: 3 public project signals, 1 recent pushes, 1 open issue markers, and 4 healthy workflow pulses."
+    "narrative": "davidvuy is in a stormy cycle: 3 public project signals, 59 recent pushes, 0 open issue markers, and 0 healthy workflow pulses."
   }
 }
