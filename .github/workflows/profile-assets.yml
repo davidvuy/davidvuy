@@ -9,9 +9,8 @@ on:
       - main
       - master
     paths-ignore:
-      - "assets/workbench.svg"
-      - "assets/recent-work.svg"
-      - "assets/tools.svg"
+      - "assets/intro.svg"
+      - "assets/trail.svg"
       - "assets/profile-state.json"
 
 permissions:
@@ -41,13 +40,13 @@ jobs:
 
       - name: Commit generated assets
         run: |
-          if [ -z "$(git status --porcelain -- assets/workbench.svg assets/recent-work.svg assets/tools.svg assets/profile-state.json)" ]; then
+          if [ -z "$(git status --porcelain -- assets/intro.svg assets/trail.svg assets/profile-state.json)" ]; then
             echo "No profile changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/workbench.svg assets/recent-work.svg assets/tools.svg assets/profile-state.json
+          git add assets/intro.svg assets/trail.svg assets/profile-state.json
           git commit -m "chore: update profile assets"
           git push
