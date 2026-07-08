@@ -1,0 +1,53 @@
+name: AI ecosystem
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "18 3 * * *"
+  push:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - "assets/ai-ecosystem.svg"
+      - "assets/ecosystem-state.json"
+
+permissions:
+  contents: write
+  actions: read
+  issues: read
+  pull-requests: read
+  metadata: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout profile
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate ecosystem SVG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/generate_ai_ecosystem.py
+
+      - name: Commit generated assets
+        run: |
+          if [ -z "$(git status --porcelain -- assets/ai-ecosystem.svg assets/ecosystem-state.json)" ]; then
+            echo "No ecosystem changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/ai-ecosystem.svg assets/ecosystem-state.json
+          git commit -m "chore: update AI ecosystem"
+          git push
