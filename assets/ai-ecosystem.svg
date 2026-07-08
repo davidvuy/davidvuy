@@ -36,7 +36,7 @@
   <line class="grid" x1="0" y1="30" x2="1200" y2="30"/><line class="grid" x1="0" y1="60" x2="1200" y2="60"/><line class="grid" x1="0" y1="90" x2="1200" y2="90"/><line class="grid" x1="0" y1="120" x2="1200" y2="120"/><line class="grid" x1="0" y1="150" x2="1200" y2="150"/><line class="grid" x1="0" y1="180" x2="1200" y2="180"/><line class="grid" x1="0" y1="210" x2="1200" y2="210"/><line class="grid" x1="0" y1="240" x2="1200" y2="240"/><line class="grid" x1="0" y1="270" x2="1200" y2="270"/><line class="grid" x1="0" y1="300" x2="1200" y2="300"/><line class="grid" x1="0" y1="330" x2="1200" y2="330"/><line class="grid" x1="0" y1="360" x2="1200" y2="360"/><line class="grid" x1="0" y1="390" x2="1200" y2="390"/><line class="grid" x1="0" y1="420" x2="1200" y2="420"/><line class="grid" x1="0" y1="450" x2="1200" y2="450"/><line class="grid" x1="0" y1="480" x2="1200" y2="480"/><line class="grid" x1="0" y1="510" x2="1200" y2="510"/><line class="grid" x1="0" y1="540" x2="1200" y2="540"/>
   <rect x="26" y="26" width="1148" height="508" rx="8" fill="none" stroke="url(#edge)" stroke-width="2"/>
   <rect class="scan" x="0" y="26" width="180" height="508"/>
-  <text x="70" y="78" class="eyebrow">PROFILE_OS / PUBLIC SIGNAL BOARD / 2026-07-08 20:54 UTC</text>
+  <text x="70" y="78" class="eyebrow">PROFILE_OS / PUBLIC SIGNAL BOARD / 2026-07-08 20:56 UTC</text>
   <text x="68" y="148" class="title">David Vuy</text>
   <text x="72" y="185" class="subtitle">AI-native prototypes, automation systems, and launchable product slices.</text>
   <rect x="70" y="220" width="550" height="190" rx="8" class="panel"/>
@@ -65,8 +65,8 @@
     <text x="0" y="0" class="eyebrow">RECENT EVENT DENSITY</text>
     <rect class="bar" x="0.0" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.38"/>
 <rect class="bar" x="10.2" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.50"/>
-<rect class="bar" x="20.5" y="58.9" width="6.2" height="21.1" fill="#2dd4bf" opacity="0.62"/>
-<rect class="bar" x="30.7" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.74"/>
+<rect class="bar" x="20.5" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.62"/>
+<rect class="bar" x="30.7" y="58.9" width="6.2" height="21.1" fill="#2dd4bf" opacity="0.74"/>
 <rect class="bar" x="41.0" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.38"/>
 <rect class="bar" x="51.2" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.50"/>
 <rect class="bar" x="61.4" y="25.4" width="6.2" height="54.6" fill="#2dd4bf" opacity="0.62"/>
