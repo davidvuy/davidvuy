@@ -17,7 +17,6 @@ permissions:
   actions: read
   issues: read
   pull-requests: read
-  metadata: read
 
 jobs:
   render:
