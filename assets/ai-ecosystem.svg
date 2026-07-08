@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Self-aware GitHub ecosystem for davidvuy</title>
-  <desc id="desc">davidvuy is in a stormy cycle: 3 public project signals, 59 recent pushes, 0 open issue markers, and 0 healthy workflow pulses.</desc>
+  <title id="title">Profile OS for David Vuy</title>
+  <desc id="desc">davidvuy is in a stormy cycle: 3 public project signals, 59 recent pushes, 0 open issue markers, and 1 healthy workflow pulses.</desc>
   <style>
     :root {
       color-scheme: dark;
@@ -157,8 +157,8 @@
       <line class="grid" x1="0" y1="500" x2="600" y2="630"/><line class="grid" x1="80" y1="500" x2="600" y2="630"/><line class="grid" x1="160" y1="500" x2="600" y2="630"/><line class="grid" x1="240" y1="500" x2="600" y2="630"/><line class="grid" x1="320" y1="500" x2="600" y2="630"/><line class="grid" x1="400" y1="500" x2="600" y2="630"/><line class="grid" x1="480" y1="500" x2="600" y2="630"/><line class="grid" x1="560" y1="500" x2="600" y2="630"/><line class="grid" x1="640" y1="500" x2="600" y2="630"/><line class="grid" x1="720" y1="500" x2="600" y2="630"/><line class="grid" x1="800" y1="500" x2="600" y2="630"/><line class="grid" x1="880" y1="500" x2="600" y2="630"/><line class="grid" x1="960" y1="500" x2="600" y2="630"/><line class="grid" x1="1040" y1="500" x2="600" y2="630"/><line class="grid" x1="1120" y1="500" x2="600" y2="630"/><line class="grid" x1="1200" y1="500" x2="600" y2="630"/>
       <line class="grid" x1="0" y1="500" x2="1200" y2="500"/><line class="grid" x1="0" y1="526" x2="1200" y2="526"/><line class="grid" x1="0" y1="552" x2="1200" y2="552"/><line class="grid" x1="0" y1="578" x2="1200" y2="578"/><line class="grid" x1="0" y1="604" x2="1200" y2="604"/><line class="grid" x1="0" y1="630" x2="1200" y2="630"/>
     </g>
-    <text x="48" y="62" class="title">Self-aware AI ecosystem</text>
-    <text x="50" y="92" class="subtitle">Generated 2026-07-08 20:35 UTC from public GitHub signals</text>
+    <text x="48" y="62" class="title">David Vuy // Profile OS</text>
+    <text x="50" y="92" class="subtitle">A living GitHub front page generated 2026-07-08 20:40 UTC</text>
 
     <rect x="42" y="122" width="418" height="172" rx="8" class="terminal"/>
     <text x="64" y="158" class="term line-0">$ ecosystem scan --owner davidvuy</text>
@@ -192,7 +192,7 @@
     </g>
 
     <text x="50" y="552" class="subtitle"><tspan x="50" dy="0">davidvuy is in a stormy cycle: 3 public project signals, 59 recent</tspan>
-<tspan x="50" dy="26">pushes, 0 open issue markers, and 0 healthy workflow pulses.</tspan></text>
+<tspan x="50" dy="26">pushes, 0 open issue markers, and 1 healthy workflow pulses.</tspan></text>
     <text x="50" y="612" class="subtitle">Repos 3 | Recent events 60 | Weather digital rain</text>
   </g>
 </svg>

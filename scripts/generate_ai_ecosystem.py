@@ -335,8 +335,10 @@ def render_svg(signals: dict[str, Any], state: dict[str, Any]) -> str:
     )
     narrative_text = svg_wrapped_text(state["narrative"], 50, 552, 1080, "subtitle")
 
+    display_owner = "David Vuy" if signals["owner"].lower() == "davidvuy" else owner
+
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Self-aware GitHub ecosystem for {owner}</title>
+  <title id="title">Profile OS for {display_owner}</title>
   <desc id="desc">{narrative}</desc>
   <style>
     :root {{
@@ -401,8 +403,8 @@ def render_svg(signals: dict[str, Any], state: dict[str, Any]) -> str:
       {"".join(f'<line class="grid" x1="{x}" y1="500" x2="600" y2="630"/>' for x in range(0, 1220, 80))}
       {"".join(f'<line class="grid" x1="0" y1="{y}" x2="1200" y2="{y}"/>' for y in range(500, 631, 26))}
     </g>
-    <text x="48" y="62" class="title">Self-aware AI ecosystem</text>
-    <text x="50" y="92" class="subtitle">Generated {generated} UTC from public GitHub signals</text>
+    <text x="48" y="62" class="title">{display_owner} // Profile OS</text>
+    <text x="50" y="92" class="subtitle">A living GitHub front page generated {generated} UTC</text>
 
     <rect x="42" y="122" width="418" height="172" rx="8" class="terminal"/>
     {terminal}
