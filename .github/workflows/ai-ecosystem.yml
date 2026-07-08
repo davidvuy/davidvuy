@@ -10,6 +10,8 @@ on:
       - master
     paths-ignore:
       - "assets/ai-ecosystem.svg"
+      - "assets/project-matrix.svg"
+      - "assets/skill-map.svg"
       - "assets/ecosystem-state.json"
 
 permissions:
@@ -40,13 +42,13 @@ jobs:
 
       - name: Commit generated assets
         run: |
-          if [ -z "$(git status --porcelain -- assets/ai-ecosystem.svg assets/ecosystem-state.json)" ]; then
+          if [ -z "$(git status --porcelain -- assets/ai-ecosystem.svg assets/project-matrix.svg assets/skill-map.svg assets/ecosystem-state.json)" ]; then
             echo "No ecosystem changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/ai-ecosystem.svg assets/ecosystem-state.json
+          git add assets/ai-ecosystem.svg assets/project-matrix.svg assets/skill-map.svg assets/ecosystem-state.json
           git commit -m "chore: update AI ecosystem"
           git push
