@@ -1,7 +1,7 @@
 {
   "signals": {
     "owner": "davidvuy",
-    "generated_at": "2026-07-08T20:56:07.157237+00:00",
+    "generated_at": "2026-07-08T21:04:05.913733+00:00",
     "repos": [
       {
         "name": "davidvuy",
@@ -9,7 +9,7 @@
         "stars": 0,
         "forks": 0,
         "open_issues": 0,
-        "pushed_at": "2026-07-08T20:55:57Z",
+        "pushed_at": "2026-07-08T20:56:07Z",
         "archived": false
       },
       {
@@ -434,7 +434,7 @@
       }
     ],
     "workflow": {
-      "successes": 2,
+      "successes": 3,
       "failures": 1
     }
   },
@@ -448,6 +448,6 @@
       "TypeScript",
       "JavaScript"
     ],
-    "narrative": "davidvuy is shipping: 3 public repos, 79 recent push events, 0 open issue signals, 2 successful workflow pulses."
+    "narrative": "davidvuy has 3 public repos, 79 recent pushes, and 0 open issues."
   }
 }

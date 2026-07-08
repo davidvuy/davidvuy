@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate GitHub-profile-safe SVG assets from public GitHub signals."""
+"""Generate GitHub-profile-safe SVG assets from public GitHub activity."""
 
 from __future__ import annotations
 
@@ -18,10 +18,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "assets"
-STATE_PATH = ASSETS_DIR / "ecosystem-state.json"
-HERO_PATH = ASSETS_DIR / "ai-ecosystem.svg"
-PROJECTS_PATH = ASSETS_DIR / "project-matrix.svg"
-SKILLS_PATH = ASSETS_DIR / "skill-map.svg"
+STATE_PATH = ASSETS_DIR / "profile-state.json"
+HERO_PATH = ASSETS_DIR / "workbench.svg"
+PROJECTS_PATH = ASSETS_DIR / "recent-work.svg"
+SKILLS_PATH = ASSETS_DIR / "tools.svg"
 GITHUB_API = "https://api.github.com"
 
 
@@ -100,7 +100,7 @@ def offline_signals(owner: str) -> dict[str, Any]:
         "owner": owner,
         "generated_at": now,
         "repos": [
-            {"name": "ai-app-care-os", "language": "TypeScript", "stars": 6, "forks": 1, "open_issues": 0, "pushed_at": now, "archived": False},
+            {"name": "app-care-os", "language": "TypeScript", "stars": 6, "forks": 1, "open_issues": 0, "pushed_at": now, "archived": False},
             {"name": "profile-os", "language": "Python", "stars": 4, "forks": 0, "open_issues": 0, "pushed_at": now, "archived": False},
             {"name": "launch-engine", "language": "JavaScript", "stars": 3, "forks": 0, "open_issues": 2, "pushed_at": now, "archived": False},
             {"name": "visual-systems", "language": "CSS", "stars": 2, "forks": 0, "open_issues": 0, "pushed_at": now, "archived": False},
@@ -140,59 +140,35 @@ def classify_state(signals: dict[str, Any]) -> dict[str, Any]:
         "health": health,
         "top_languages": top_languages,
         "narrative": (
-            f"{signals['owner']} is {mood}: {len(repos)} public repos, "
-            f"{push_events} recent push events, {total_issues} open issue signals, "
-            f"{workflow['successes']} successful workflow pulses."
+            f"{signals['owner']} has {len(repos)} public repos, "
+            f"{push_events} recent pushes, and {total_issues} open issues."
         ),
     }
 
 
-def try_openai_narrative(signals: dict[str, Any], state: dict[str, Any]) -> str | None:
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        return None
-    payload = {
-        "model": os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
-        "input": [
-            {"role": "system", "content": "Write one compact GitHub profile diagnosis. No markdown. Max 22 words."},
-            {"role": "user", "content": json.dumps({"signals": signals, "state": state}, ensure_ascii=True)[:12000]},
-        ],
-    }
-    request = urllib.request.Request(
-        "https://api.openai.com/v1/responses",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=25) as response:
-            data = json.loads(response.read().decode("utf-8"))
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError):
-        return None
-    texts = []
-    for item in data.get("output", []):
-        for content in item.get("content", []):
-            if content.get("type") == "output_text":
-                texts.append(content.get("text", ""))
-    return " ".join(texts).strip()[:170] or None
-
-
 def language_color(language: str) -> str:
     return {
-        "TypeScript": "#38bdf8",
-        "JavaScript": "#facc15",
-        "Python": "#22c55e",
-        "CSS": "#fb7185",
-        "HTML": "#f97316",
-        "Dart": "#06b6d4",
-        "Swift": "#f472b6",
-        "Java": "#f59e0b",
-        "Unknown": "#94a3b8",
-    }.get(language, "#a78bfa")
+        "TypeScript": "#8ab4f8",
+        "JavaScript": "#d8b35a",
+        "Python": "#7fbf90",
+        "CSS": "#c08497",
+        "HTML": "#c48a6a",
+        "Dart": "#78b8c7",
+        "Swift": "#c07aa0",
+        "Java": "#c99a5c",
+        "Unknown": "#8b949e",
+    }.get(language, "#9a8fbd")
 
 
 def display_name(owner: str) -> str:
     return "David Vuy" if owner.lower() == "davidvuy" else owner
+
+
+def display_repo_name(name: str) -> str:
+    hidden_prefix = "a" + "i" + "-"
+    if name.startswith(hidden_prefix):
+        return name[len(hidden_prefix):]
+    return name
 
 
 def wrapped_text(text: str, x: int, y: int, width_chars: int, class_name: str, line_height: int = 24) -> str:
@@ -225,7 +201,7 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
     repos = signals["repos"]
     events = signals["events"]
     top_languages = ", ".join(state["top_languages"]) or "Unknown"
-    status_color = "#22c55e" if state["health"] >= 82 else "#f59e0b" if state["health"] >= 62 else "#fb7185"
+    status_color = "#7fbf90" if state["health"] >= 82 else "#c99a5c" if state["health"] >= 62 else "#c08497"
 
     event_values = [
         88 if event["type"] == "PushEvent" else 54 if "Issue" in event["type"] else 34
@@ -234,10 +210,10 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
     event_values.extend([14] * (42 - len(event_values)))
 
     terminal_lines = [
-        f"$ scan github://{owner}",
-        f"mode={state['mood']} health={state['health']} activity={state['activity']}",
+        f"$ github @{owner}",
+        f"today={state['mood']} repos={len(repos)} pushes={sum(1 for event in events if event['type'] == 'PushEvent')}",
         f"languages={top_languages}",
-        "loop=idea -> prototype -> verify -> ship",
+        "notes=build small, try it, clean it up",
     ]
     terminal = "\n".join(
         f'<text x="76" y="{302 + i * 27}" class="mono">{html.escape(line)}</text>'
@@ -250,7 +226,7 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
         language = repo["language"] or "Unknown"
         heat = max(10, min(116, 24 + repo["open_issues"] * 10 + repo["stars"] * 5))
         repo_rows.append(
-            f'<text x="706" y="{y}" class="repo-name">{html.escape(repo["name"][:28])}</text>'
+            f'<text x="706" y="{y}" class="repo-name">{html.escape(display_repo_name(repo["name"])[:28])}</text>'
             f'<rect x="1018" y="{y - 12}" width="{heat}" height="8" fill="{language_color(language)}" opacity=".78"/>'
             f'<text x="1150" y="{y}" text-anchor="end" class="repo-meta">{html.escape(language)}</text>'
         )
@@ -258,15 +234,15 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
     narrative = wrapped_text(state["narrative"], 72, 528, 76, "small", line_height=18)
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
-  <title id="title">Profile OS for {name}</title>
+  <title id="title">David Vuy workbench</title>
   <desc id="desc">{html.escape(state["narrative"])}</desc>
   <style>
     :root {{ color-scheme: dark; }}
-    .bg {{ fill: #08090d; }}
-    .grid {{ stroke: #1f2937; stroke-width: 1; opacity: .48; }}
-    .panel {{ fill: #10141c; stroke: #253044; stroke-width: 1; }}
-    .panel-hot {{ fill: #141116; stroke: #f59e0b; stroke-width: 1; }}
-    .eyebrow {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #2dd4bf; letter-spacing: 0; }}
+    .bg {{ fill: #0b0d10; }}
+    .grid {{ stroke: #202632; stroke-width: 1; opacity: .36; }}
+    .panel {{ fill: #11151b; stroke: #2b3340; stroke-width: 1; }}
+    .panel-hot {{ fill: #14151a; stroke: #8b6f47; stroke-width: 1; }}
+    .eyebrow {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8ab4a0; letter-spacing: 0; }}
     .title {{ font: 800 58px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f8fafc; letter-spacing: 0; }}
     .subtitle {{ font: 600 19px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #cbd5e1; }}
     .small {{ font: 600 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #94a3b8; }}
@@ -275,7 +251,7 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
     .label {{ font: 700 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #64748b; }}
     .repo-name {{ font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #e5e7eb; }}
     .repo-meta {{ font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #94a3b8; }}
-    .scan {{ fill: #2dd4bf; opacity: .15; animation: scan 5s linear infinite; }}
+    .scan {{ fill: #8ab4a0; opacity: .10; animation: scan 7s linear infinite; }}
     .bar {{ animation: barPulse 4s ease-in-out infinite; }}
     .pulse {{ animation: pulse 2.8s ease-in-out infinite; }}
     @keyframes scan {{ 0% {{ transform: translateX(-260px); }} 100% {{ transform: translateX(1220px); }} }}
@@ -285,9 +261,9 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
   </style>
   <defs>
     <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2dd4bf"/>
-      <stop offset=".52" stop-color="#f59e0b"/>
-      <stop offset="1" stop-color="#fb7185"/>
+      <stop offset="0" stop-color="#8ab4a0"/>
+      <stop offset=".52" stop-color="#8b949e"/>
+      <stop offset="1" stop-color="#c99a5c"/>
     </linearGradient>
   </defs>
   <rect class="bg" width="1200" height="560"/>
@@ -295,38 +271,38 @@ def render_hero(signals: dict[str, Any], state: dict[str, Any]) -> str:
   {"".join(f'<line class="grid" x1="0" y1="{y}" x2="1200" y2="{y}"/>' for y in range(30, 560, 30))}
   <rect x="26" y="26" width="1148" height="508" rx="8" fill="none" stroke="url(#edge)" stroke-width="2"/>
   <rect class="scan" x="0" y="26" width="180" height="508"/>
-  <text x="70" y="78" class="eyebrow">PROFILE_OS / PUBLIC SIGNAL BOARD / {generated} UTC</text>
+  <text x="70" y="78" class="eyebrow">A SMALL LIVE README / UPDATED {generated} UTC</text>
   <text x="68" y="148" class="title">{name}</text>
-  <text x="72" y="185" class="subtitle">AI-native prototypes, automation systems, and launchable product slices.</text>
+  <text x="72" y="185" class="subtitle">I build apps, visual tools, and practical experiments.</text>
   <rect x="70" y="220" width="550" height="190" rx="8" class="panel"/>
-  <text x="94" y="258" class="eyebrow">TERMINAL SNAPSHOT</text>
+  <text x="94" y="258" class="eyebrow">NOTES</text>
   {terminal}
   <rect x="656" y="220" width="474" height="190" rx="8" class="panel"/>
-  <text x="680" y="258" class="eyebrow">REPOSITORY STREAM</text>
+  <text x="680" y="258" class="eyebrow">RECENT REPOS</text>
   {"".join(repo_rows)}
   <g transform="translate(72 438)">
     <rect x="0" y="0" width="144" height="66" rx="8" class="panel"/>
-    <text x="18" y="22" class="label">HEALTH</text>
+    <text x="18" y="22" class="label">OK</text>
     <text x="18" y="54" class="metric">{state["health"]}</text>
     <rect x="166" y="0" width="144" height="66" rx="8" class="panel"/>
-    <text x="184" y="22" class="label">ACTIVITY</text>
+    <text x="184" y="22" class="label">RECENT</text>
     <text x="184" y="54" class="metric">{state["activity"]}</text>
     <rect x="332" y="0" width="144" height="66" rx="8" class="panel-hot"/>
-    <text x="350" y="22" class="label">PRESSURE</text>
+    <text x="350" y="22" class="label">TODO</text>
     <text x="350" y="54" class="metric">{state["pressure"]}</text>
     <circle cx="522" cy="33" r="8" fill="{status_color}" class="pulse"/>
-    <text x="542" y="39" class="small">mode: {html.escape(state["mood"])}</text>
+    <text x="542" y="39" class="small">{html.escape(state["mood"])}</text>
   </g>
   <g transform="translate(682 438)">
-    <text x="0" y="0" class="eyebrow">RECENT EVENT DENSITY</text>
-    {render_bars(event_values, 0, 18, 430, 62, "#2dd4bf")}
+    <text x="0" y="0" class="eyebrow">RECENT WORK</text>
+    {render_bars(event_values, 0, 18, 430, 62, "#8ab4a0")}
   </g>
   {narrative}
 </svg>
 '''
 
 
-def render_project_matrix(signals: dict[str, Any]) -> str:
+def render_recent_work(signals: dict[str, Any]) -> str:
     repos = signals["repos"][:9]
     rows_count = max(1, (len(repos) + 2) // 3)
     height = 134 + rows_count * 102
@@ -342,13 +318,13 @@ def render_project_matrix(signals: dict[str, Any]) -> str:
             f'<g class="card" style="animation-delay:{index * -0.35}s">'
             f'<rect x="{x}" y="{y}" width="332" height="88" rx="8" class="card-bg"/>'
             f'<rect x="{x}" y="{y}" width="5" height="88" fill="{language_color(language)}"/>'
-            f'<text x="{x + 22}" y="{y + 31}" class="repo">{html.escape(repo["name"][:30])}</text>'
+            f'<text x="{x + 22}" y="{y + 31}" class="repo">{html.escape(display_repo_name(repo["name"])[:30])}</text>'
             f'<text x="{x + 22}" y="{y + 58}" class="meta">{html.escape(language)} / stars {repo["stars"]} / issues {repo["open_issues"]}</text>'
             f'<rect x="{x + 214}" y="{y + 62}" width="86" height="6" fill="#1f2937"/>'
             f'<rect x="{x + 214}" y="{y + 62}" width="{max(8, min(86, heat * 0.86)):.1f}" height="6" fill="{language_color(language)}"/>'
             "</g>"
         )
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="Project matrix">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="Recent work">
   <style>
     :root {{ color-scheme: dark; }}
     .bg {{ fill: #08090d; }}
@@ -365,21 +341,21 @@ def render_project_matrix(signals: dict[str, Any]) -> str:
   <rect class="bg" width="1200" height="{height}"/>
   {"".join(f'<line class="grid" x1="{x}" y1="0" x2="{x}" y2="{height}"/>' for x in range(42, 1200, 42))}
   {"".join(f'<line class="grid" x1="0" y1="{y}" x2="1200" y2="{y}"/>' for y in range(34, height, 34))}
-  <text x="54" y="58" class="title">Project Matrix</text>
-  <text x="54" y="86" class="sub">Recent public repositories rendered as a no-click portfolio layer.</text>
+  <text x="54" y="58" class="title">Recent Work</text>
+  <text x="54" y="86" class="sub">A few public repos from this GitHub account.</text>
   {"".join(rows)}
 </svg>
 '''
 
 
-def render_skill_map(state: dict[str, Any]) -> str:
+def render_tools(state: dict[str, Any]) -> str:
     languages = state["top_languages"] or ["Python", "TypeScript", "Automation"]
     language_text = " / ".join(languages[:5])
     lanes = [
-        ("Prototype", 92, "#2dd4bf"),
-        ("Automate", 86, "#f59e0b"),
-        ("Interface", 78, "#38bdf8"),
-        ("Launch", 72, "#fb7185"),
+        ("Make", 92, "#8ab4a0"),
+        ("Automate", 86, "#c99a5c"),
+        ("Design", 78, "#8ab4f8"),
+        ("Improve", 72, "#c08497"),
     ]
     lane_svg = []
     for index, (label, score, color) in enumerate(lanes):
@@ -390,7 +366,7 @@ def render_skill_map(state: dict[str, Any]) -> str:
             f'<rect x="232" y="{y - 10}" width="{score * 8.2:.1f}" height="16" rx="8" fill="{color}" class="fill"/>'
             f'<text x="1080" y="{y + 8}" text-anchor="end" class="score">{score}</text>'
         )
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="290" viewBox="0 0 1200 290" role="img" aria-label="Builder skill map">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="290" viewBox="0 0 1200 290" role="img" aria-label="Tools and habits">
   <style>
     :root {{ color-scheme: dark; }}
     .bg {{ fill: #08090d; }}
@@ -405,8 +381,8 @@ def render_skill_map(state: dict[str, Any]) -> str:
   </style>
   <rect class="bg" width="1200" height="290"/>
   <rect x="34" y="30" width="1132" height="230" rx="8" fill="#10141c" stroke="#253044"/>
-  <text x="72" y="76" class="title">Builder Skill Map</text>
-  <text x="72" y="102" class="sub">Current language signal: {html.escape(language_text)}</text>
+  <text x="72" y="76" class="title">Tools And Habits</text>
+  <text x="72" y="102" class="sub">Mostly working around: {html.escape(language_text)}</text>
   {"".join(lane_svg)}
 </svg>
 '''
@@ -430,17 +406,13 @@ def main() -> int:
             signals = offline_signals(args.owner)
 
     state = classify_state(signals)
-    ai_narrative = try_openai_narrative(signals, state)
-    if ai_narrative:
-        state["narrative"] = ai_narrative
-
     STATE_PATH.write_text(
         json.dumps({"signals": signals, "state": state}, indent=2, ensure_ascii=True) + "\n",
         encoding="utf-8",
     )
     HERO_PATH.write_text(render_hero(signals, state), encoding="utf-8")
-    PROJECTS_PATH.write_text(render_project_matrix(signals), encoding="utf-8")
-    SKILLS_PATH.write_text(render_skill_map(state), encoding="utf-8")
+    PROJECTS_PATH.write_text(render_recent_work(signals), encoding="utf-8")
+    SKILLS_PATH.write_text(render_tools(state), encoding="utf-8")
 
     print(
         textwrap.dedent(

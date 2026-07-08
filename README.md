@@ -1,67 +1,56 @@
 <h1 align="center">David Vuy</h1>
 
 <p align="center">
-  AI-native prototypes, automation systems, creative interfaces, and practical product launches.
+  I build small useful things, test ideas quickly, and keep improving what works.
 </p>
 
 <p align="center">
-  <img alt="David Vuy profile operating system" src="assets/ai-ecosystem.svg" width="100%">
+  <img alt="David Vuy workbench" src="assets/workbench.svg" width="100%">
 </p>
 
-## Signal
+## Hi
 
-This front page is generated like a small public command center. GitHub activity goes in; SVG systems come out.
+I'm David. I like building apps, visual interfaces, automation, and practical tools that can actually be used.
+
+I care about getting from idea to working version fast, then making it cleaner once the shape is real.
 
 <p align="center">
-  <img alt="Recent repositories project matrix" src="assets/project-matrix.svg" width="100%">
+  <img alt="Recent work" src="assets/recent-work.svg" width="100%">
 </p>
 
 <p align="center">
-  <img alt="Builder skill map" src="assets/skill-map.svg" width="100%">
+  <img alt="Tools and habits" src="assets/tools.svg" width="100%">
 </p>
 
-## Builder Notes
+## What I Like
 
-| Zone | Focus |
+| Area | What I mean |
 | --- | --- |
-| Product instinct | Build the smallest version that can be tried by a real person. |
-| AI systems | Use models as workflow engines, evaluators, researchers, and interface material. |
-| Interface taste | Prefer dense, clear, animated systems over generic landing-page gloss. |
-| Launch filter | A project is not real until usage, feedback, legal basics, and payment path are considered. |
+| Apps | Simple tools with a clear reason to exist. |
+| Interfaces | Screens that feel clean, quick, and a little different. |
+| Automation | Repeated work that should not stay manual forever. |
+| Product work | Making sure an idea can survive contact with real users. |
 
-## Operating Loop
+## How I Work
 
 ```txt
-observe    repo, market, user, workflow, bottleneck
-compress   turn the messy thing into one testable slice
-build      ship a working version before decorating the theory
-verify     run it, break it, measure it, simplify it
-launch     make the next user action obvious
+start small
+make it work
+try it honestly
+remove what is fake
+improve the part people actually use
 ```
 
-## Current Experiments
-
-| Experiment | Status |
-| --- | --- |
-| Profile OS | Running here. Generates the visible front page from GitHub signals. |
-| Project Matrix | Turns public repos into no-click visual portfolio cards. |
-| Skill Map | Summarizes the current builder posture from public activity. |
-| Next Layer | Generated case-study strips, launch scoreboard, and repo quest board. |
-
-## Tech I Reach For
+## Tools
 
 ```bash
 TypeScript  Python  React  Next.js  Node.js  GitHub Actions
-SVG         CSS     Automation  AI APIs  Product thinking
+SVG         CSS     APIs       Databases Product thinking
 ```
 
-## How This Page Updates
-
-The workflow in `.github/workflows/ai-ecosystem.yml` runs on a schedule, on demand, and after profile changes. It writes the SVG assets in `assets/`, then commits the new profile state back into this repo.
-
-Local preview:
+This profile updates itself from public GitHub activity. Local preview:
 
 ```bash
-python3 scripts/generate_ai_ecosystem.py --offline --owner davidvuy
-open assets/ai-ecosystem.svg
+python3 scripts/generate_profile_assets.py --offline --owner davidvuy
+open preview.html
 ```

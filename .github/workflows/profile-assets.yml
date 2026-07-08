@@ -1,4 +1,4 @@
-name: AI ecosystem
+name: Profile assets
 
 on:
   workflow_dispatch:
@@ -9,10 +9,10 @@ on:
       - main
       - master
     paths-ignore:
-      - "assets/ai-ecosystem.svg"
-      - "assets/project-matrix.svg"
-      - "assets/skill-map.svg"
-      - "assets/ecosystem-state.json"
+      - "assets/workbench.svg"
+      - "assets/recent-work.svg"
+      - "assets/tools.svg"
+      - "assets/profile-state.json"
 
 permissions:
   contents: write
@@ -33,22 +33,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate ecosystem SVG
+      - name: Generate profile SVGs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_OWNER: ${{ github.repository_owner }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python scripts/generate_ai_ecosystem.py
+        run: python scripts/generate_profile_assets.py
 
       - name: Commit generated assets
         run: |
-          if [ -z "$(git status --porcelain -- assets/ai-ecosystem.svg assets/project-matrix.svg assets/skill-map.svg assets/ecosystem-state.json)" ]; then
-            echo "No ecosystem changes to commit."
+          if [ -z "$(git status --porcelain -- assets/workbench.svg assets/recent-work.svg assets/tools.svg assets/profile-state.json)" ]; then
+            echo "No profile changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/ai-ecosystem.svg assets/project-matrix.svg assets/skill-map.svg assets/ecosystem-state.json
-          git commit -m "chore: update AI ecosystem"
+          git add assets/workbench.svg assets/recent-work.svg assets/tools.svg assets/profile-state.json
+          git commit -m "chore: update profile assets"
           git push
