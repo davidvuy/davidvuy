@@ -227,9 +227,13 @@ def render_intro(profile: dict[str, Any]) -> str:
     .orbit {{ fill: none; stroke: #ff7b72; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1 10; opacity: .72; }}
     .planet {{ fill: #79c0ff; }}
     .spark {{ fill: #ff7b72; opacity: .92; }}
+    .plane-path {{ fill: none; stroke: #8b949e; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 4 10; opacity: .55; }}
+    .plane {{ fill: #f0f6fc; opacity: .95; }}
+    .plane-group {{ animation: drift 7.5s ease-in-out infinite; }}
     .blink {{ animation: blink 1.7s steps(2) infinite; }}
     .float {{ animation: float 4.5s ease-in-out infinite; }}
     .orbit-spin {{ animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }}
+    @keyframes drift {{ 0%, 100% {{ transform: translate(0, 0); }} 50% {{ transform: translate(-10px, 6px); }} }}
     @keyframes blink {{ 50% {{ opacity: .15; }} }}
     @keyframes float {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-10px); }} }}
     @keyframes orbit-spin {{ from {{ transform: rotate(0deg); }} to {{ transform: rotate(360deg); }} }}
@@ -249,6 +253,11 @@ def render_intro(profile: dict[str, Any]) -> str:
     <rect x="954" y="140" width="78" height="14" fill="#30363d"/>
     <rect x="954" y="166" width="58" height="14" fill="#30363d"/>
     <circle cx="1044" cy="190" r="8" class="pink blink"/>
+  </g>
+  <path d="M 742 88 C 786 66, 838 64, 884 86 S 972 126, 1030 100" class="plane-path"/>
+  <g class="plane-group" transform="translate(1024 98) rotate(6)">
+    <path d="M 0 0 L 24 8 L 0 16 L 6 8 Z" class="plane"/>
+    <path d="M 6 8 L 24 8" class="plane-path"/>
   </g>
   <text x="92" y="132" class="tiny">hello, i'm</text>
   <text x="90" y="202" class="name">David Vuy</text>
