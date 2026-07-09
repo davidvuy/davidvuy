@@ -295,6 +295,9 @@ def render_intro(profile: dict[str, Any]) -> str:
     .plane-path {{ fill: none; stroke: #8b949e; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 4 10; opacity: .55; }}
     .plane {{ fill: #f0f6fc; opacity: .95; }}
     .plane-group {{ animation: drift 7.5s ease-in-out infinite; }}
+    .postmark-ring {{ fill: none; stroke: #8b949e; stroke-width: 1.4; stroke-dasharray: 3 7; opacity: .55; }}
+    .postmark-slice {{ fill: none; stroke: #79c0ff; stroke-width: 2; stroke-linecap: round; opacity: .85; }}
+    .postmark-text {{ font: 700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.6px; fill: #c9d1d9; opacity: .78; }}
     .blink {{ animation: blink 1.7s steps(2) infinite; }}
     .float {{ animation: float 4.5s ease-in-out infinite; }}
     .orbit-spin {{ animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }}
@@ -323,6 +326,13 @@ def render_intro(profile: dict[str, Any]) -> str:
     <circle cx="995" cy="182" r="5" class="blue"/>
     <circle cx="1024" cy="146" r="5" class="yellow"/>
     <circle cx="1032" cy="184" r="7" class="pink blink"/>
+  </g>
+  <g transform="translate(860 106) rotate(-10)">
+    <circle cx="0" cy="0" r="32" class="postmark-ring"/>
+    <circle cx="0" cy="0" r="21" class="postmark-ring"/>
+    <path d="M -17 -6 C -7 -14, 6 -14, 16 -6" class="postmark-slice"/>
+    <path d="M -15 8 C -5 16, 7 16, 17 8" class="postmark-slice"/>
+    <text x="-18" y="3" class="postmark-text">OPEN</text>
   </g>
   <path d="M 742 88 C 786 66, 838 64, 884 86 S 972 126, 1030 100" class="plane-path"/>
   <g class="plane-group" transform="translate(1024 98) rotate(6)">
