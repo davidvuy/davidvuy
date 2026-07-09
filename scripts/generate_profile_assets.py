@@ -156,30 +156,47 @@ def clean_repo_name(name: str) -> str:
     return name[len(hidden_prefix):] if name.startswith(hidden_prefix) else name
 
 
+def language_accent(language: str) -> str:
+    normalized = (language or "").strip().lower()
+    palette = {
+        "typescript": "#3178c6",
+        "javascript": "#f1e05a",
+        "python": "#3572a5",
+        "react": "#61dafb",
+        "next.js": "#f0f6fc",
+        "css": "#563d7c",
+        "html": "#e34c26",
+        "go": "#00add8",
+        "rust": "#dea584",
+    }
+    return palette.get(normalized, "#7ee787")
+
+
 def build_intro_pills(profile: dict[str, Any]) -> str:
     owner = profile["owner"].lower()
-    names: list[str] = []
+    items: list[tuple[str, str]] = []
     for repo in profile["repos"]:
         cleaned = clean_repo_name(repo["name"])
         if cleaned.lower() == owner:
             continue
-        names.append(cleaned)
-        if len(names) == 3:
+        items.append((cleaned, repo.get("language") or "Code"))
+        if len(items) == 3:
             break
 
-    if not names:
-        names = ["small useful things"]
+    if not items:
+        items = [("small useful things", "Code")]
 
     x = 94
     pills: list[str] = []
-    for name in names:
+    for name, language in items:
         short_name = name if len(name) <= 24 else f"{name[:21]}..."
         label = html.escape(short_name)
+        dot_fill = language_accent(language)
         width = max(112, min(230, 32 + len(name) * 9))
         pills.append(
             f'<g transform="translate({x} 268)">'
             f'<rect width="{width}" height="32" rx="16" class="pill"/>'
-            f'<circle cx="16" cy="16" r="4" class="green"/>'
+            f'<circle cx="16" cy="16" r="4" fill="{dot_fill}"/>'
             f'<text x="30" y="21" class="pill-text">{label}</text>'
             f'</g>'
         )
