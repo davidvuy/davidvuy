@@ -156,10 +156,39 @@ def clean_repo_name(name: str) -> str:
     return name[len(hidden_prefix):] if name.startswith(hidden_prefix) else name
 
 
+def build_intro_pills(profile: dict[str, Any]) -> str:
+    owner = profile["owner"].lower()
+    names: list[str] = []
+    for repo in profile["repos"]:
+        cleaned = clean_repo_name(repo["name"])
+        if cleaned.lower() == owner:
+            continue
+        names.append(cleaned)
+        if len(names) == 3:
+            break
+
+    if not names:
+        names = ["small useful things"]
+
+    x = 94
+    pills: list[str] = []
+    for name in names:
+        short_name = name if len(name) <= 24 else f"{name[:21]}..."
+        label = html.escape(short_name)
+        width = max(112, min(230, 32 + len(name) * 9))
+        pills.append(
+            f'<g transform="translate({x} 268)">'
+            f'<rect width="{width}" height="32" rx="16" class="pill"/>'
+            f'<circle cx="16" cy="16" r="4" class="green"/>'
+            f'<text x="30" y="21" class="pill-text">{label}</text>'
+            f'</g>'
+        )
+        x += width + 12
+    return "".join(pills)
+
+
 def render_intro(profile: dict[str, Any]) -> str:
-    repos = profile["repos"][:3]
-    repo_text = " / ".join(clean_repo_name(repo["name"]) for repo in repos) or "small useful things"
-    repo_text = html.escape(repo_text[:72])
+    intro_pills = build_intro_pills(profile)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="David Vuy intro">
   <style>
     :root {{ color-scheme: dark; }}
@@ -170,6 +199,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     .line {{ font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
     .tiny {{ font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
     .note-text {{ font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }}
+    .pill {{ fill: #111827; stroke: #30363d; }}
+    .pill-text {{ font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
     .green {{ fill: #7ee787; }}
     .blue {{ fill: #79c0ff; }}
     .pink {{ fill: #ff7b72; }}
@@ -196,7 +227,8 @@ def render_intro(profile: dict[str, Any]) -> str:
   <text x="92" y="132" class="tiny">hello, i'm</text>
   <text x="90" y="202" class="name">David Vuy</text>
   <text x="94" y="248" class="line">I make apps, playful interfaces, and useful experiments.</text>
-  <text x="94" y="286" class="tiny">recent bits: {repo_text}</text>
+  <text x="94" y="286" class="tiny">recent bits</text>
+  {intro_pills}
   <path d="M 760 172 C 790 158, 820 154, 850 160" class="wire"/>
   <path d="M 762 188 C 792 202, 822 206, 850 198" class="wire"/>
   <g transform="rotate(-7 848 244)">

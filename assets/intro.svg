@@ -8,6 +8,8 @@
     .line { font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
     .tiny { font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }
     .note-text { font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }
+    .pill { fill: #111827; stroke: #30363d; }
+    .pill-text { font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
     .green { fill: #7ee787; }
     .blue { fill: #79c0ff; }
     .pink { fill: #ff7b72; }
@@ -34,7 +36,8 @@
   <text x="92" y="132" class="tiny">hello, i'm</text>
   <text x="90" y="202" class="name">David Vuy</text>
   <text x="94" y="248" class="line">I make apps, playful interfaces, and useful experiments.</text>
-  <text x="94" y="286" class="tiny">recent bits: davidvuy / app-care-os / mortydex-explorer-restart</text>
+  <text x="94" y="286" class="tiny">recent bits</text>
+  <g transform="translate(94 268)"><rect width="131" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" class="green"/><text x="30" y="21" class="pill-text">app-care-os</text></g><g transform="translate(237 268)"><rect width="230" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" class="green"/><text x="30" y="21" class="pill-text">mortydex-explorer-res...</text></g>
   <path d="M 760 172 C 790 158, 820 154, 850 160" class="wire"/>
   <path d="M 762 188 C 792 202, 822 206, 850 198" class="wire"/>
   <g transform="rotate(-7 848 244)">
