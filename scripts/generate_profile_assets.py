@@ -259,10 +259,10 @@ def render_intro(profile: dict[str, Any]) -> str:
   <path d="M 760 172 C 790 158, 820 154, 850 160" class="wire"/>
   <path d="M 762 188 C 792 202, 822 206, 850 198" class="wire"/>
   <g transform="rotate(-7 848 244)">
-    <rect x="792" y="214" width="112" height="68" rx="8" class="note"/>
+    <rect x="792" y="214" width="118" height="68" rx="8" class="note"/>
     <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
-    <text x="808" y="242" class="note-text">ship</text>
-    <text x="808" y="262" class="note-text">trim repeat</text>
+    <text x="808" y="242" class="note-text">small</text>
+    <text x="808" y="262" class="note-text">but real</text>
   </g>
   <circle cx="894" cy="90" r="3.5" class="spark blink"/>
   <circle cx="918" cy="72" r="2.8" class="spark"/>
