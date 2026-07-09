@@ -204,8 +204,24 @@ def build_intro_pills(profile: dict[str, Any]) -> str:
     return "".join(pills)
 
 
+def build_intro_note(profile: dict[str, Any]) -> tuple[str, str]:
+    owner = profile["owner"].lower()
+    fallback = ("small", "but real")
+    for repo in profile["repos"]:
+        cleaned = clean_repo_name(repo["name"])
+        if cleaned.lower() == owner:
+            continue
+        words = cleaned.replace("_", " ").replace("-", " ").split()
+        if not words:
+            return fallback
+        short = " ".join(words[:2])[:14].lower()
+        return ("lately", short)
+    return fallback
+
+
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
+    note_top, note_bottom = build_intro_note(profile)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="David Vuy intro">
   <style>
     :root {{ color-scheme: dark; }}
@@ -270,8 +286,8 @@ def render_intro(profile: dict[str, Any]) -> str:
   <g transform="rotate(-7 848 244)">
     <rect x="792" y="214" width="118" height="68" rx="8" class="note"/>
     <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
-    <text x="808" y="242" class="note-text">small</text>
-    <text x="808" y="262" class="note-text">but real</text>
+    <text x="808" y="242" class="note-text">{html.escape(note_top)}</text>
+    <text x="808" y="262" class="note-text">{html.escape(note_bottom)}</text>
   </g>
   <circle cx="894" cy="90" r="3.5" class="spark blink"/>
   <circle cx="918" cy="72" r="2.8" class="spark"/>
