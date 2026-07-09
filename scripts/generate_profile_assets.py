@@ -219,6 +219,15 @@ def build_intro_note(profile: dict[str, Any]) -> tuple[str, str]:
     return fallback
 
 
+def current_streak(days: list[dict[str, Any]]) -> int:
+    streak = 0
+    for day in reversed(days):
+        if int(day.get("contributionCount") or 0) <= 0:
+            break
+        streak += 1
+    return streak
+
+
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
@@ -306,6 +315,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     x0 = 74
     y0 = 104
     max_count = max([day["contributionCount"] for day in days] + [1])
+    streak = current_streak(days)
     colors = ["#161b22", "#173b25", "#246b3d", "#2ea043", "#7ee787"]
     cells = []
     active_points: list[tuple[int, int]] = []
@@ -368,6 +378,8 @@ def render_trail(profile: dict[str, Any]) -> str:
             f'</g>'
         )
 
+    streak_label = f"{streak}-day streak" if streak > 0 else "new streak soon"
+
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Contribution trail">
   <style>
     :root {{ color-scheme: dark; }}
@@ -388,6 +400,10 @@ def render_trail(profile: dict[str, Any]) -> str:
     .spool-wrap {{ fill: none; stroke: #ff7b72; stroke-width: 2; stroke-linecap: round; opacity: .9; }}
     .spool {{ animation: bob 6s ease-in-out infinite; transform-origin: 14px 18px; }}
     .needle {{ animation: hop 1.9s ease-in-out infinite; }}
+    .tag {{ fill: #111827; stroke: #30363d; stroke-width: 1.2; }}
+    .tag-text {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
+    .tag-accent {{ fill: #7ee787; }}
+    .tag-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }}
     @keyframes bob {{ 0%, 100% {{ transform: rotate(0deg) translateY(0); }} 50% {{ transform: rotate(-6deg) translateY(-2px); }} }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
@@ -395,6 +411,12 @@ def render_trail(profile: dict[str, Any]) -> str:
   <rect class="bg" width="1200" height="260"/>
   <text x="74" y="48" class="title">contribution trail</text>
   <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. A tiny needle threads through the latest active days.</text>
+  <g transform="translate(980 34)">
+    <rect width="146" height="34" rx="17" class="tag"/>
+    <path d="M 14 17 H 132" class="tag-stitch"/>
+    <circle cx="22" cy="17" r="4" class="tag-accent"/>
+    <text x="34" y="22" class="tag-text">{html.escape(streak_label)}</text>
+  </g>
   {"".join(month_labels)}
   {"".join(cells)}
   {path}
