@@ -205,11 +205,13 @@ def render_trail(profile: dict[str, Any]) -> str:
     cell = 13
     gap = 4
     x0 = 74
-    y0 = 94
+    y0 = 104
     max_count = max([day["contributionCount"] for day in days] + [1])
     colors = ["#161b22", "#173b25", "#246b3d", "#2ea043", "#7ee787"]
     cells = []
     active_points: list[tuple[int, int]] = []
+    month_labels: list[str] = []
+    seen_months: set[str] = set()
     for index, day in enumerate(days):
         week = index // 7
         weekday = index % 7
@@ -222,6 +224,16 @@ def render_trail(profile: dict[str, Any]) -> str:
         )
         if count > 0:
             active_points.append((x + cell // 2, y + cell // 2))
+        try:
+            day_date = datetime.strptime(day["date"], "%Y-%m-%d")
+        except (TypeError, ValueError):
+            continue
+        month_key = day_date.strftime("%Y-%m")
+        if day_date.day <= 7 and month_key not in seen_months:
+            seen_months.add(month_key)
+            month_labels.append(
+                f'<text x="{x}" y="90" class="month">{day_date.strftime("%b").lower()}</text>'
+            )
 
     sampled = active_points[-42:]
     path = ""
@@ -240,13 +252,15 @@ def render_trail(profile: dict[str, Any]) -> str:
     .bg {{ fill: #0d1117; }}
     .title {{ font: 800 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .sub {{ font: 650 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
+    .month {{ font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; }}
     .head {{ animation: hop 1.9s ease-in-out infinite; }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
   <rect class="bg" width="1200" height="260"/>
   <text x="74" y="48" class="title">contribution trail</text>
-  <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. The red dot follows the latest active days.</text>
+  <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. The red dot stitches together the latest active days.</text>
+  {"".join(month_labels)}
   {"".join(cells)}
   {path}
 </svg>
@@ -269,7 +283,7 @@ def main() -> int:
         except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, KeyError):
             profile = offline_profile(args.owner)
 
-    STATE_PATH.write_text(json.dumps(profile, indent=2, ensure_ascii=True) + "\\n", encoding="utf-8")
+    STATE_PATH.write_text(json.dumps(profile, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
     INTRO_PATH.write_text(render_intro(profile), encoding="utf-8")
     TRAIL_PATH.write_text(render_trail(profile), encoding="utf-8")
     print(f"Generated {INTRO_PATH}")
