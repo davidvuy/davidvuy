@@ -275,6 +275,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     .note-shadow {{ fill: #0d1117; opacity: .34; }}
     .note-fold {{ fill: #f0d86a; stroke: #8b949e; stroke-width: 1.2; }}
     .note-crease {{ fill: none; stroke: #d29922; stroke-width: 1.2; stroke-linecap: round; opacity: .9; }}
+    .note-rule {{ fill: none; stroke: #79c0ff; stroke-width: 1.1; stroke-linecap: round; opacity: .28; }}
     .name {{ font: 800 62px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .line {{ font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
     .tiny {{ font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
@@ -385,6 +386,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     <rect x="792" y="214" width="118" height="68" rx="8" class="note"/>
     <path d="M 886 214 H 902 Q 910 214 910 222 V 238 Z" class="note-fold"/>
     <path d="M 886 214 L 910 238" class="note-crease"/>
+    <path d="M 804 246 H 898" class="note-rule"/>
+    <path d="M 804 266 H 892" class="note-rule"/>
     <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
     <g transform="translate(804 208) rotate(-9)">
       <rect width="24" height="10" rx="3" class="tape"/>
