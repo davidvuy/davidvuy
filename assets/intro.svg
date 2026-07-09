@@ -5,6 +5,8 @@
     .soft { fill: #161b22; stroke: #30363d; }
     .note { fill: #f6e58d; stroke: #8b949e; stroke-width: 1.4; }
     .note-shadow { fill: #0d1117; opacity: .34; }
+    .note-fold { fill: #f0d86a; stroke: #8b949e; stroke-width: 1.2; }
+    .note-crease { fill: none; stroke: #d29922; stroke-width: 1.2; stroke-linecap: round; opacity: .9; }
     .name { font: 800 62px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }
     .line { font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
     .tiny { font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }
@@ -85,6 +87,8 @@
   <g transform="rotate(-7 848 244)">
     <rect x="796" y="218" width="118" height="68" rx="8" class="note-shadow"/>
     <rect x="792" y="214" width="118" height="68" rx="8" class="note"/>
+    <path d="M 886 214 H 902 Q 910 214 910 222 V 238 Z" class="note-fold"/>
+    <path d="M 886 214 L 910 238" class="note-crease"/>
     <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
     <g transform="translate(804 208) rotate(-9)">
       <rect width="24" height="10" rx="3" class="tape"/>
