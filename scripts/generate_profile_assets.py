@@ -336,8 +336,10 @@ def render_trail(profile: dict[str, Any]) -> str:
 
     sampled = active_points[-42:]
     path = ""
+    spool = ""
     if sampled:
         points = " ".join(f"{x},{y}" for x, y in sampled)
+        tx, ty = sampled[0]
         hx, hy = sampled[-1]
         stitch_marks = []
         for sx, sy in sampled[-6:-1]:
@@ -345,7 +347,17 @@ def render_trail(profile: dict[str, Any]) -> str:
                 f'<path d="M {sx - 4} {sy - 4} L {sx + 4} {sy + 4} M {sx + 4} {sy - 4} L {sx - 4} {sy + 4}" '
                 f'class="stitch"/>'
             )
+        spool = (
+            f'<path d="M 42 {ty} C 50 {ty - 12}, 58 {ty - 12}, 66 {ty}" class="lead-thread"/>'
+            f'<g class="spool" transform="translate(28 {ty - 18})">'
+            f'<circle cx="14" cy="18" r="13" class="spool-wood"/>'
+            f'<circle cx="14" cy="18" r="5" class="spool-core"/>'
+            f'<rect x="12" y="3" width="4" height="30" rx="2" class="spool-pin"/>'
+            f'<path d="M 9 8 C 15 10, 19 14, 19 18 C 19 22, 15 26, 9 28" class="spool-wrap"/>'
+            f'</g>'
+        )
         path = (
+            f'{spool}'
             f'<polyline points="{points}" fill="none" class="trail"/>'
             f'{"".join(stitch_marks)}'
             f'<g class="needle" transform="translate({hx} {hy}) rotate(-18)">'
@@ -364,12 +376,19 @@ def render_trail(profile: dict[str, Any]) -> str:
     .sub {{ font: 650 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
     .month {{ font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; }}
     .trail {{ stroke: #7ee787; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .58; stroke-dasharray: 3 9; }}
+    .lead-thread {{ fill: none; stroke: #ff7b72; stroke-width: 2.4; stroke-linecap: round; opacity: .72; stroke-dasharray: 2 8; }}
     .stitch {{ stroke: #79c0ff; stroke-width: 1.7; stroke-linecap: round; opacity: .9; }}
     .thread {{ stroke: #ff7b72; stroke-width: 3.2; stroke-linecap: round; }}
     .shaft {{ stroke: #c9d1d9; stroke-width: 3.2; stroke-linecap: round; }}
     .eye {{ fill: none; stroke: #f0f6fc; stroke-width: 2; }}
     .eye-hole {{ fill: #f0f6fc; }}
+    .spool-wood {{ fill: #d29922; stroke: #8b949e; stroke-width: 1.2; }}
+    .spool-core {{ fill: #0d1117; opacity: .8; }}
+    .spool-pin {{ fill: #f6e58d; opacity: .9; }}
+    .spool-wrap {{ fill: none; stroke: #ff7b72; stroke-width: 2; stroke-linecap: round; opacity: .9; }}
+    .spool {{ animation: bob 6s ease-in-out infinite; transform-origin: 14px 18px; }}
     .needle {{ animation: hop 1.9s ease-in-out infinite; }}
+    @keyframes bob {{ 0%, 100% {{ transform: rotate(0deg) translateY(0); }} 50% {{ transform: rotate(-6deg) translateY(-2px); }} }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
