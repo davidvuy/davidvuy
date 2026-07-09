@@ -228,6 +228,24 @@ def current_streak(days: list[dict[str, Any]]) -> int:
     return streak
 
 
+def trail_tagline(days: list[dict[str, Any]]) -> str:
+    streak = current_streak(days)
+    if streak > 0:
+        return f"{streak}-day streak"
+
+    recent = days[-7:]
+    active_days = sum(1 for day in recent if int(day.get("contributionCount") or 0) > 0)
+    total_recent = sum(int(day.get("contributionCount") or 0) for day in recent)
+
+    if total_recent >= 10:
+        return "busy little week"
+    if active_days >= 3:
+        return "thread stayed warm"
+    if active_days >= 1:
+        return "small spark lately"
+    return "new streak soon"
+
+
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
@@ -325,7 +343,6 @@ def render_trail(profile: dict[str, Any]) -> str:
     x0 = 74
     y0 = 104
     max_count = max([day["contributionCount"] for day in days] + [1])
-    streak = current_streak(days)
     colors = ["#161b22", "#173b25", "#246b3d", "#2ea043", "#7ee787"]
     cells = []
     active_points: list[tuple[int, int]] = []
@@ -388,7 +405,7 @@ def render_trail(profile: dict[str, Any]) -> str:
             f'</g>'
         )
 
-    streak_label = f"{streak}-day streak" if streak > 0 else "new streak soon"
+    streak_label = trail_tagline(days)
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Contribution trail">
   <style>
