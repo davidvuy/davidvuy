@@ -252,6 +252,11 @@ def render_intro(profile: dict[str, Any]) -> str:
     .orbit {{ fill: none; stroke: #ff7b72; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1 10; opacity: .72; }}
     .planet {{ fill: #79c0ff; }}
     .spark {{ fill: #ff7b72; opacity: .92; }}
+    .stamp-card {{ fill: #111827; stroke: #30363d; }}
+    .stamp-hole {{ fill: #0d1117; opacity: .95; }}
+    .stamp-title {{ font: 800 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.3px; fill: #f0f6fc; }}
+    .stamp-line {{ stroke: #30363d; stroke-width: 2; stroke-linecap: round; }}
+    .stamp-wave {{ fill: none; stroke: #79c0ff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }}
     .plane-path {{ fill: none; stroke: #8b949e; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 4 10; opacity: .55; }}
     .plane {{ fill: #f0f6fc; opacity: .95; }}
     .plane-group {{ animation: drift 7.5s ease-in-out infinite; }}
@@ -271,13 +276,18 @@ def render_intro(profile: dict[str, Any]) -> str:
     <circle cx="254" cy="110" r="5" class="planet"/>
   </g>
   <g class="float">
-    <rect x="930" y="82" width="132" height="132" rx="18" fill="#111827" stroke="#30363d"/>
-    <rect x="954" y="110" width="18" height="18" class="green"/>
-    <rect x="984" y="110" width="18" height="18" class="blue"/>
-    <rect x="1014" y="110" width="18" height="18" class="yellow"/>
-    <rect x="954" y="140" width="78" height="14" fill="#30363d"/>
-    <rect x="954" y="166" width="58" height="14" fill="#30363d"/>
-    <circle cx="1044" cy="190" r="8" class="pink blink"/>
+    <rect x="930" y="82" width="132" height="132" rx="18" class="stamp-card"/>
+    <circle cx="944" cy="96" r="4" class="stamp-hole"/><circle cx="960" cy="96" r="4" class="stamp-hole"/><circle cx="976" cy="96" r="4" class="stamp-hole"/><circle cx="992" cy="96" r="4" class="stamp-hole"/><circle cx="1008" cy="96" r="4" class="stamp-hole"/><circle cx="1024" cy="96" r="4" class="stamp-hole"/><circle cx="1040" cy="96" r="4" class="stamp-hole"/>
+    <circle cx="944" cy="200" r="4" class="stamp-hole"/><circle cx="960" cy="200" r="4" class="stamp-hole"/><circle cx="976" cy="200" r="4" class="stamp-hole"/><circle cx="992" cy="200" r="4" class="stamp-hole"/><circle cx="1008" cy="200" r="4" class="stamp-hole"/><circle cx="1024" cy="200" r="4" class="stamp-hole"/><circle cx="1040" cy="200" r="4" class="stamp-hole"/>
+    <circle cx="944" cy="112" r="4" class="stamp-hole"/><circle cx="944" cy="128" r="4" class="stamp-hole"/><circle cx="944" cy="144" r="4" class="stamp-hole"/><circle cx="944" cy="160" r="4" class="stamp-hole"/><circle cx="944" cy="176" r="4" class="stamp-hole"/><circle cx="944" cy="192" r="4" class="stamp-hole"/>
+    <circle cx="1048" cy="112" r="4" class="stamp-hole"/><circle cx="1048" cy="128" r="4" class="stamp-hole"/><circle cx="1048" cy="144" r="4" class="stamp-hole"/><circle cx="1048" cy="160" r="4" class="stamp-hole"/><circle cx="1048" cy="176" r="4" class="stamp-hole"/><circle cx="1048" cy="192" r="4" class="stamp-hole"/>
+    <text x="956" y="118" class="stamp-title">BY HAND</text>
+    <path d="M 956 128 H 1038" class="stamp-line"/>
+    <path d="M 960 168 C 974 148, 990 156, 1002 168 S 1028 188, 1038 160" class="stamp-wave"/>
+    <circle cx="972" cy="150" r="5" class="green"/>
+    <circle cx="995" cy="182" r="5" class="blue"/>
+    <circle cx="1024" cy="146" r="5" class="yellow"/>
+    <circle cx="1032" cy="184" r="7" class="pink blink"/>
   </g>
   <path d="M 742 88 C 786 66, 838 64, 884 86 S 972 126, 1030 100" class="plane-path"/>
   <g class="plane-group" transform="translate(1024 98) rotate(6)">
