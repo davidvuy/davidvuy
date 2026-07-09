@@ -466,7 +466,9 @@ def render_trail(profile: dict[str, Any]) -> str:
     .spool-wrap {{ fill: none; stroke: #ff7b72; stroke-width: 2; stroke-linecap: round; opacity: .9; }}
     .spool {{ animation: bob 6s ease-in-out infinite; transform-origin: 14px 18px; }}
     .needle {{ animation: hop 1.9s ease-in-out infinite; }}
+    .tag-string {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .72; }}
     .tag {{ fill: #111827; stroke: #30363d; stroke-width: 1.2; }}
+    .tag-eyelet {{ fill: #0d1117; stroke: #8b949e; stroke-width: 1.2; }}
     .tag-text {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .tag-accent {{ fill: #7ee787; }}
     .tag-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }}
@@ -477,11 +479,14 @@ def render_trail(profile: dict[str, Any]) -> str:
   <rect class="bg" width="1200" height="260"/>
   <text x="74" y="48" class="title">contribution trail</text>
   <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. A tiny needle threads through the latest active days.</text>
-  <g transform="translate(980 34)">
-    <rect width="146" height="34" rx="17" class="tag"/>
-    <path d="M 14 17 H 132" class="tag-stitch"/>
-    <circle cx="22" cy="17" r="4" class="tag-accent"/>
-    <text x="34" y="22" class="tag-text">{html.escape(streak_label)}</text>
+  <g transform="translate(968 20) rotate(-4)">
+    <path d="M 20 0 C 18 14, 18 24, 24 33" class="tag-string"/>
+    <path d="M 24 33 L 132 33 L 146 49 L 132 65 L 24 65 Q 10 65 10 49 Q 10 33 24 33 Z" class="tag"/>
+    <circle cx="28" cy="49" r="6" class="tag-eyelet"/>
+    <circle cx="28" cy="49" r="2.5" class="bg"/>
+    <path d="M 42 49 H 126" class="tag-stitch"/>
+    <circle cx="50" cy="49" r="4" class="tag-accent"/>
+    <text x="62" y="54" class="tag-text">{html.escape(streak_label)}</text>
   </g>
   {"".join(month_labels)}
   {"".join(cells)}
