@@ -304,6 +304,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     .tape {{ fill: #79c0ff; opacity: .82; }}
     .tape-stripe {{ stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; opacity: .42; }}
     .paperclip {{ fill: none; stroke: #f0f6fc; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }}
+    .coffee-ring {{ fill: none; stroke: #d29922; stroke-width: 3; stroke-linecap: round; opacity: .2; }}
+    .coffee-drop {{ fill: #d29922; opacity: .14; }}
     .cursor {{ fill: #f6e58d; opacity: .95; }}
     .blink {{ animation: blink 1.7s steps(2) infinite; }}
     .float {{ animation: float 4.5s ease-in-out infinite; }}
@@ -316,6 +318,11 @@ def render_intro(profile: dict[str, Any]) -> str:
   </style>
   <rect class="bg" width="1200" height="360"/>
   <rect x="42" y="42" width="1116" height="276" rx="18" class="soft"/>
+  <g transform="translate(980 258) rotate(8)">
+    <circle cx="0" cy="0" r="35" class="coffee-ring"/>
+    <path d="M -19 -28 C -3 -35, 17 -32, 28 -17 C 36 -6, 36 14, 24 28" class="coffee-ring"/>
+    <ellipse cx="28" cy="22" rx="7" ry="4" class="coffee-drop"/>
+  </g>
   <g class="orbit-spin">
     <ellipse cx="182" cy="110" rx="72" ry="28" class="orbit"/>
     <circle cx="254" cy="110" r="5" class="planet"/>
