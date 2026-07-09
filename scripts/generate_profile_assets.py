@@ -223,15 +223,24 @@ def render_intro(profile: dict[str, Any]) -> str:
     .pink {{ fill: #ff7b72; }}
     .yellow {{ fill: #d29922; }}
     .wire {{ fill: none; stroke: #79c0ff; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 2 9; opacity: .75; }}
+    .scribble {{ fill: none; stroke: #7ee787; stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }}
+    .orbit {{ fill: none; stroke: #ff7b72; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1 10; opacity: .72; }}
+    .planet {{ fill: #79c0ff; }}
     .spark {{ fill: #ff7b72; opacity: .92; }}
     .blink {{ animation: blink 1.7s steps(2) infinite; }}
     .float {{ animation: float 4.5s ease-in-out infinite; }}
+    .orbit-spin {{ animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }}
     @keyframes blink {{ 50% {{ opacity: .15; }} }}
     @keyframes float {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-10px); }} }}
+    @keyframes orbit-spin {{ from {{ transform: rotate(0deg); }} to {{ transform: rotate(360deg); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
   <rect class="bg" width="1200" height="360"/>
   <rect x="42" y="42" width="1116" height="276" rx="18" class="soft"/>
+  <g class="orbit-spin">
+    <ellipse cx="182" cy="110" rx="72" ry="28" class="orbit"/>
+    <circle cx="254" cy="110" r="5" class="planet"/>
+  </g>
   <g class="float">
     <rect x="930" y="82" width="132" height="132" rx="18" fill="#111827" stroke="#30363d"/>
     <rect x="954" y="110" width="18" height="18" class="green"/>
@@ -243,6 +252,7 @@ def render_intro(profile: dict[str, Any]) -> str:
   </g>
   <text x="92" y="132" class="tiny">hello, i'm</text>
   <text x="90" y="202" class="name">David Vuy</text>
+  <path d="M 94 214 C 164 232, 255 230, 356 214 C 388 209, 408 207, 430 214" class="scribble"/>
   <text x="94" y="248" class="line">I make apps, playful interfaces, and useful experiments.</text>
   <text x="94" y="286" class="tiny">recent bits</text>
   {intro_pills}
