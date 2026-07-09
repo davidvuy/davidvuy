@@ -35,6 +35,7 @@
     .postmark-text { font: 700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.6px; fill: #c9d1d9; opacity: .78; }
     .tape { fill: #79c0ff; opacity: .82; }
     .tape-stripe { stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; opacity: .42; }
+    .cursor { fill: #f6e58d; opacity: .95; }
     .blink { animation: blink 1.7s steps(2) infinite; }
     .float { animation: float 4.5s ease-in-out infinite; }
     .orbit-spin { animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }
@@ -77,6 +78,7 @@
     <path d="M 6 8 L 24 8" class="plane-path"/>
   </g>
   <text x="92" y="132" class="tiny">hello, i'm</text>
+  <rect x="208" y="116" width="12" height="18" rx="2.5" class="cursor blink"/>
   <text x="90" y="202" class="name">David Vuy</text>
   <path d="M 94 214 C 164 232, 255 230, 356 214 C 388 209, 408 207, 430 214" class="scribble"/>
   <text x="94" y="248" class="line">I make apps, playful interfaces, and useful experiments.</text>
