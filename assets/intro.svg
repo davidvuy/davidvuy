@@ -35,6 +35,7 @@
     .postmark-text { font: 700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.6px; fill: #c9d1d9; opacity: .78; }
     .tape { fill: #79c0ff; opacity: .82; }
     .tape-stripe { stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; opacity: .42; }
+    .paperclip { fill: none; stroke: #f0f6fc; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
     .cursor { fill: #f6e58d; opacity: .95; }
     .blink { animation: blink 1.7s steps(2) infinite; }
     .float { animation: float 4.5s ease-in-out infinite; }
@@ -99,6 +100,9 @@
     <g transform="translate(878 210) rotate(11)">
       <rect width="22" height="10" rx="3" class="tape"/>
       <path d="M 4 2.5 H 18 M 4 5 H 18 M 4 7.5 H 18" class="tape-stripe"/>
+    </g>
+    <g transform="translate(900 208) rotate(26)">
+      <path d="M 0 0 C 8 -6, 18 -4, 20 5 C 22 13, 15 21, 7 18 C 1 16, 1 8, 7 6 C 11 5, 14 8, 13 12" class="paperclip"/>
     </g>
     <text x="808" y="242" class="note-text">lately</text>
     <text x="808" y="262" class="note-text">care os</text>
