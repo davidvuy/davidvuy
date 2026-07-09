@@ -240,10 +240,21 @@ def render_trail(profile: dict[str, Any]) -> str:
     if sampled:
         points = " ".join(f"{x},{y}" for x, y in sampled)
         hx, hy = sampled[-1]
+        stitch_marks = []
+        for sx, sy in sampled[-6:-1]:
+            stitch_marks.append(
+                f'<path d="M {sx - 4} {sy - 4} L {sx + 4} {sy + 4} M {sx + 4} {sy - 4} L {sx - 4} {sy + 4}" '
+                f'class="stitch"/>'
+            )
         path = (
-            f'<polyline points="{points}" fill="none" stroke="#7ee787" stroke-width="4" '
-            f'stroke-linecap="round" stroke-linejoin="round" opacity=".62"/>'
-            f'<circle cx="{hx}" cy="{hy}" r="8" fill="#ff7b72" class="head"/>'
+            f'<polyline points="{points}" fill="none" class="trail"/>'
+            f'{"".join(stitch_marks)}'
+            f'<g class="needle" transform="translate({hx} {hy}) rotate(-18)">'
+            f'<line x1="-22" y1="0" x2="-4" y2="0" class="thread"/>'
+            f'<line x1="-4" y1="0" x2="10" y2="0" class="shaft"/>'
+            f'<ellipse cx="14" cy="0" rx="6" ry="3.5" class="eye"/>'
+            f'<circle cx="14" cy="0" r="1.2" class="eye-hole"/>'
+            f'</g>'
         )
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Contribution trail">
@@ -253,13 +264,19 @@ def render_trail(profile: dict[str, Any]) -> str:
     .title {{ font: 800 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .sub {{ font: 650 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
     .month {{ font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; }}
-    .head {{ animation: hop 1.9s ease-in-out infinite; }}
+    .trail {{ stroke: #7ee787; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .58; stroke-dasharray: 3 9; }}
+    .stitch {{ stroke: #79c0ff; stroke-width: 1.7; stroke-linecap: round; opacity: .9; }}
+    .thread {{ stroke: #ff7b72; stroke-width: 3.2; stroke-linecap: round; }}
+    .shaft {{ stroke: #c9d1d9; stroke-width: 3.2; stroke-linecap: round; }}
+    .eye {{ fill: none; stroke: #f0f6fc; stroke-width: 2; }}
+    .eye-hole {{ fill: #f0f6fc; }}
+    .needle {{ animation: hop 1.9s ease-in-out infinite; }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
   <rect class="bg" width="1200" height="260"/>
   <text x="74" y="48" class="title">contribution trail</text>
-  <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. The red dot stitches together the latest active days.</text>
+  <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. A tiny needle threads through the latest active days.</text>
   {"".join(month_labels)}
   {"".join(cells)}
   {path}
