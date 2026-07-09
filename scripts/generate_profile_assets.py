@@ -156,6 +156,28 @@ def clean_repo_name(name: str) -> str:
     return name[len(hidden_prefix):] if name.startswith(hidden_prefix) else name
 
 
+def pretty_repo_label(name: str, *, max_words: int = 2, max_chars: int = 22) -> str:
+    words = [word for word in clean_repo_name(name).replace("_", " ").replace("-", " ").split() if word]
+    if not words:
+        return "small useful things"
+
+    leading_noise = {"app", "project", "repo"}
+    trailing_noise = {"restart", "rebuild", "prototype", "starter", "template", "demo", "sandbox"}
+
+    while len(words) > 1 and words[0].lower() in leading_noise:
+        words.pop(0)
+    while len(words) > 1 and words[-1].lower() in trailing_noise:
+        words.pop()
+
+    label_words = words[:max_words]
+    label = " ".join(label_words)
+    if len(label) > max_chars and len(label_words) > 1:
+        label = label_words[0]
+    if len(label) > max_chars:
+        label = f"{label[: max_chars - 3].rstrip()}..."
+    return label.lower()
+
+
 def language_accent(language: str) -> str:
     normalized = (language or "").strip().lower()
     palette = {
@@ -179,7 +201,7 @@ def build_intro_pills(profile: dict[str, Any]) -> str:
         cleaned = clean_repo_name(repo["name"])
         if cleaned.lower() == owner:
             continue
-        items.append((cleaned, repo.get("language") or "Code"))
+        items.append((pretty_repo_label(cleaned), repo.get("language") or "Code"))
         if len(items) == 3:
             break
 
@@ -189,8 +211,7 @@ def build_intro_pills(profile: dict[str, Any]) -> str:
     x = 94
     pills: list[str] = []
     for name, language in items:
-        short_name = name if len(name) <= 24 else f"{name[:21]}..."
-        label = html.escape(short_name)
+        label = html.escape(name)
         dot_fill = language_accent(language)
         width = max(112, min(230, 32 + len(name) * 9))
         pills.append(
@@ -211,11 +232,7 @@ def build_intro_note(profile: dict[str, Any]) -> tuple[str, str]:
         cleaned = clean_repo_name(repo["name"])
         if cleaned.lower() == owner:
             continue
-        words = cleaned.replace("_", " ").replace("-", " ").split()
-        if not words:
-            return fallback
-        short = " ".join(words[:2])[:14].lower()
-        return ("lately", short)
+        return ("lately", pretty_repo_label(cleaned, max_chars=14))
     return fallback
 
 
