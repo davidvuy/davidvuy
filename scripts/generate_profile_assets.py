@@ -590,6 +590,13 @@ def render_trail(profile: dict[str, Any]) -> str:
             f'<text x="7" y="7.2" class="pin-text">now</text>'
             f'</g>'
         )
+        latest_loop = (
+            f'<g class="latest-loop" transform="translate({hx} {hy})">'
+            f'<path d="M -12 -2 C -12 -10, -4 -14, 4 -12 C 12 -10, 14 -2, 11 5 C 8 12, -2 14, -9 10 C -13 7, -14 1, -12 -2 Z" class="latest-loop-ring"/>'
+            f'<path d="M 6 -10 C 9 -13, 13 -13, 15 -9" class="latest-loop-spark"/>'
+            f'<circle cx="15" cy="-8" r="1.8" class="latest-loop-dot"/>'
+            f'</g>'
+        )
         spool = (
             f'<path d="M 42 {ty} C 50 {ty - 12}, 58 {ty - 12}, 66 {ty}" class="lead-thread"/>'
             f'<g class="spool" transform="translate(28 {ty - 18})">'
@@ -609,6 +616,7 @@ def render_trail(profile: dict[str, Any]) -> str:
             f'{spool}'
             f'<polyline points="{points}" fill="none" class="trail"/>'
             f'{"".join(stitch_marks)}'
+            f'{latest_loop}'
             f'<g class="needle" transform="translate({hx} {hy}) rotate(-18)">'
             f'<line x1="-22" y1="0" x2="-4" y2="0" class="thread"/>'
             f'<line x1="-4" y1="0" x2="10" y2="0" class="shaft"/>'
@@ -670,6 +678,10 @@ def render_trail(profile: dict[str, Any]) -> str:
     .pin-flag {{ fill: #79c0ff; stroke: #30363d; stroke-width: 1.1; opacity: .96; }}
     .pin-flag-stitch {{ fill: none; stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; stroke-dasharray: 1.5 3.5; opacity: .72; }}
     .pin-text {{ font: 800 8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .8px; fill: #0d1117; }}
+    .latest-loop {{ animation: orbit-mark 3.8s ease-in-out infinite; transform-origin: center; }}
+    .latest-loop-ring {{ fill: none; stroke: #f6e58d; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }}
+    .latest-loop-spark {{ fill: none; stroke: #79c0ff; stroke-width: 1.5; stroke-linecap: round; opacity: .85; }}
+    .latest-loop-dot {{ fill: #79c0ff; opacity: .92; }}
     .tag-string {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .72; }}
     .tag {{ fill: #111827; stroke: #30363d; stroke-width: 1.2; }}
     .tag-eyelet {{ fill: #0d1117; stroke: #8b949e; stroke-width: 1.2; }}
@@ -683,6 +695,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     .tag-perf {{ fill: none; stroke: #8b949e; stroke-width: 1.1; stroke-linecap: round; stroke-dasharray: 1.2 4.2; opacity: .9; }}
     @keyframes bob {{ 0%, 100% {{ transform: rotate(0deg) translateY(0); }} 50% {{ transform: rotate(-6deg) translateY(-2px); }} }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
+    @keyframes orbit-mark {{ 0%, 100% {{ transform: rotate(-3deg) translateY(0); }} 50% {{ transform: rotate(2deg) translateY(-1px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
   <rect class="bg" width="1200" height="260"/>
