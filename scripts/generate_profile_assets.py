@@ -323,6 +323,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     :root {{ color-scheme: dark; }}
     .bg {{ fill: #0d1117; }}
     .soft {{ fill: #161b22; stroke: #30363d; }}
+    .punch-hole {{ fill: #0d1117; stroke: #30363d; stroke-width: 1.2; opacity: .96; }}
+    .punch-shadow {{ fill: #79c0ff; opacity: .08; }}
     .corner-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1.5 6; opacity: .72; }}
     .note {{ fill: #f6e58d; stroke: #8b949e; stroke-width: 1.4; }}
     .note-shadow {{ fill: #0d1117; opacity: .34; }}
@@ -385,6 +387,14 @@ def render_intro(profile: dict[str, Any]) -> str:
   </style>
   <rect class="bg" width="1200" height="360"/>
   <rect x="42" y="42" width="1116" height="276" rx="18" class="soft"/>
+  <g transform="translate(56 0)">
+    <ellipse cx="0" cy="108" rx="8" ry="12" class="punch-shadow"/>
+    <ellipse cx="0" cy="180" rx="8" ry="12" class="punch-shadow"/>
+    <ellipse cx="0" cy="252" rx="8" ry="12" class="punch-shadow"/>
+    <ellipse cx="0" cy="108" rx="6.5" ry="10" class="punch-hole"/>
+    <ellipse cx="0" cy="180" rx="6.5" ry="10" class="punch-hole"/>
+    <ellipse cx="0" cy="252" rx="6.5" ry="10" class="punch-hole"/>
+  </g>
   <path d="M 84 88 C 84 64, 98 50, 122 50" class="corner-stitch"/>
   <path d="M 84 110 C 84 78, 104 58, 136 58" class="corner-stitch"/>
   <path d="M 1116 272 C 1138 272, 1152 258, 1152 236" class="corner-stitch"/>
