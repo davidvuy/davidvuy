@@ -236,6 +236,19 @@ def build_intro_note(profile: dict[str, Any]) -> tuple[str, str]:
     return fallback
 
 
+def build_postmark_text(profile: dict[str, Any]) -> tuple[str, str]:
+    generated_at = profile.get("generated_at")
+    if isinstance(generated_at, str):
+        normalized = generated_at.replace("Z", "+00:00")
+        try:
+            stamp_date = datetime.fromisoformat(normalized)
+        except ValueError:
+            stamp_date = None
+        if stamp_date:
+            return (stamp_date.strftime("%b").upper(), stamp_date.strftime("%y"))
+    return ("NOW", "++")
+
+
 def current_streak(days: list[dict[str, Any]]) -> int:
     streak = 0
     for day in reversed(days):
@@ -266,6 +279,7 @@ def trail_tagline(days: list[dict[str, Any]]) -> str:
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
+    postmark_top, postmark_bottom = build_postmark_text(profile)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="David Vuy intro">
   <style>
     :root {{ color-scheme: dark; }}
@@ -302,6 +316,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     .postmark-ring {{ fill: none; stroke: #8b949e; stroke-width: 1.4; stroke-dasharray: 3 7; opacity: .55; }}
     .postmark-slice {{ fill: none; stroke: #79c0ff; stroke-width: 2; stroke-linecap: round; opacity: .85; }}
     .postmark-text {{ font: 700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.6px; fill: #c9d1d9; opacity: .78; }}
+    .postmark-date {{ font: 800 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.1px; fill: #f0f6fc; opacity: .92; }}
     .tape {{ fill: #79c0ff; opacity: .82; }}
     .tape-stripe {{ stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; opacity: .42; }}
     .paperclip {{ fill: none; stroke: #f0f6fc; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }}
@@ -365,7 +380,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     <circle cx="0" cy="0" r="21" class="postmark-ring"/>
     <path d="M -17 -6 C -7 -14, 6 -14, 16 -6" class="postmark-slice"/>
     <path d="M -15 8 C -5 16, 7 16, 17 8" class="postmark-slice"/>
-    <text x="-18" y="3" class="postmark-text">OPEN</text>
+    <text x="-11" y="-2" class="postmark-date">{html.escape(postmark_top)}</text>
+    <text x="-7" y="12" class="postmark-text">{html.escape(postmark_bottom)}</text>
   </g>
   <path d="M 742 88 C 786 66, 838 64, 884 86 S 972 126, 1030 100" class="plane-path"/>
   <g class="plane-group" transform="translate(1024 98) rotate(6)">
