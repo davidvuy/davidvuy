@@ -238,6 +238,31 @@ def build_intro_note(profile: dict[str, Any]) -> tuple[str, str]:
     return fallback
 
 
+def build_intro_note_tab(profile: dict[str, Any]) -> tuple[str, str, int]:
+    owner = profile["owner"].lower()
+    label_map = {
+        "typescript": "TS",
+        "javascript": "JS",
+        "python": "PY",
+        "react": "UI",
+        "next.js": "NX",
+        "css": "CSS",
+        "html": "HTML",
+        "go": "GO",
+        "rust": "RS",
+    }
+    for repo in profile["repos"]:
+        cleaned = clean_repo_name(repo["name"])
+        if cleaned.lower() == owner:
+            continue
+        language = (repo.get("language") or "Code").strip()
+        normalized = language.lower()
+        label = label_map.get(normalized, language[:4].upper())
+        width = max(26, min(40, 14 + len(label) * 6))
+        return (label, language_accent(language), width)
+    return ("NEW", "#79c0ff", 34)
+
+
 def build_postmark_text(profile: dict[str, Any]) -> tuple[str, str]:
     generated_at = profile.get("generated_at")
     if isinstance(generated_at, str):
@@ -291,6 +316,7 @@ def trail_project_label(profile: dict[str, Any]) -> str:
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
+    note_tab_text, note_tab_fill, note_tab_width = build_intro_note_tab(profile)
     postmark_top, postmark_bottom = build_postmark_text(profile)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="David Vuy intro">
   <style>
@@ -306,6 +332,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     .line {{ font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
     .tiny {{ font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
     .note-text {{ font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }}
+    .note-chip-text {{ font: 800 9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1px; fill: #f0f6fc; text-anchor: middle; }}
     .pill {{ fill: #111827; stroke: #30363d; }}
     .pill-text {{ font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
     .pill-thread {{ fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 2 6; opacity: .78; }}
@@ -431,7 +458,8 @@ def render_intro(profile: dict[str, Any]) -> str:
     <path d="M 886 214 L 910 238" class="note-crease"/>
     <path d="M 804 246 H 898" class="note-rule"/>
     <path d="M 804 266 H 892" class="note-rule"/>
-    <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
+    <rect x="832" y="208" width="{note_tab_width}" height="12" rx="4" fill="{note_tab_fill}" opacity=".92"/>
+    <text x="{832 + note_tab_width / 2}" y="217" class="note-chip-text">{html.escape(note_tab_text)}</text>
     <g transform="translate(804 208) rotate(-9)">
       <rect width="24" height="10" rx="3" class="tape"/>
       <path d="M 5 2.5 H 19 M 5 5 H 19 M 5 7.5 H 19" class="tape-stripe"/>

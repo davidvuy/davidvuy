@@ -12,6 +12,7 @@
     .line { font: 650 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
     .tiny { font: 650 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }
     .note-text { font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }
+    .note-chip-text { font: 800 9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1px; fill: #f0f6fc; text-anchor: middle; }
     .pill { fill: #111827; stroke: #30363d; }
     .pill-text { font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
     .pill-thread { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 2 6; opacity: .78; }
@@ -137,7 +138,8 @@
     <path d="M 886 214 L 910 238" class="note-crease"/>
     <path d="M 804 246 H 898" class="note-rule"/>
     <path d="M 804 266 H 892" class="note-rule"/>
-    <rect x="832" y="208" width="26" height="12" rx="4" fill="#79c0ff" opacity=".9"/>
+    <rect x="832" y="208" width="26" height="12" rx="4" fill="#3178c6" opacity=".92"/>
+    <text x="845.0" y="217" class="note-chip-text">TS</text>
     <g transform="translate(804 208) rotate(-9)">
       <rect width="24" height="10" rx="3" class="tape"/>
       <path d="M 5 2.5 H 19 M 5 5 H 19 M 5 7.5 H 19" class="tape-stripe"/>
