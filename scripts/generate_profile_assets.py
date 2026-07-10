@@ -546,7 +546,8 @@ def render_trail(profile: dict[str, Any]) -> str:
         marker = (
             f'<g transform="translate({hx + 12} {hy - 28}) rotate(-4)">'
             f'<path d="M 0 0 V 30" class="pin-stem"/>'
-            f'<path d="M 0 0 H 34 L 24 10 L 0 10 Z" class="pin-flag"/>'
+            f'<path d="M 0 0 H 34 V 10 H 26 L 21 5 L 26 0 H 0 Z" class="pin-flag"/>'
+            f'<path d="M 6 5 H 24" class="pin-flag-stitch"/>'
             f'<text x="7" y="7.2" class="pin-text">now</text>'
             f'</g>'
         )
@@ -611,6 +612,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     .needle {{ animation: hop 1.9s ease-in-out infinite; }}
     .pin-stem {{ fill: none; stroke: #c9d1d9; stroke-width: 1.8; stroke-linecap: round; opacity: .9; }}
     .pin-flag {{ fill: #79c0ff; stroke: #30363d; stroke-width: 1.1; opacity: .96; }}
+    .pin-flag-stitch {{ fill: none; stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; stroke-dasharray: 1.5 3.5; opacity: .72; }}
     .pin-text {{ font: 800 8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .8px; fill: #0d1117; }}
     .tag-string {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .72; }}
     .tag {{ fill: #111827; stroke: #30363d; stroke-width: 1.2; }}
