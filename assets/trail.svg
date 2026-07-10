@@ -33,6 +33,8 @@
     .tag-text { font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }
     .tag-accent { fill: #7ee787; }
     .tag-stitch { fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }
+    .tag-bar-strong { fill: #f0f6fc; opacity: .7; }
+    .tag-bar-soft { fill: #8b949e; opacity: .45; }
     @keyframes bob { 0%, 100% { transform: rotate(0deg) translateY(0); } 50% { transform: rotate(-6deg) translateY(-2px); } }
     @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -50,6 +52,7 @@
     <text x="62" y="46" class="tag-kicker">recent patch</text>
     <text x="62" y="63" class="tag-text">care os</text>
     <text x="62" y="76" class="tag-kicker">small spark lately</text>
+    <rect x="172" y="41" width="2.2" height="30" class="tag-bar-strong"/><rect x="177" y="41" width="1.4" height="30" class="tag-bar-soft"/><rect x="181" y="41" width="3.0" height="30" class="tag-bar-strong"/><rect x="187" y="41" width="1.6" height="30" class="tag-bar-soft"/><rect x="191" y="41" width="2.4" height="30" class="tag-bar-strong"/><rect x="197" y="41" width="1.2" height="30" class="tag-bar-soft"/><rect x="201" y="41" width="3.4" height="30" class="tag-bar-strong"/>
   </g>
   <text x="56" y="131" class="weekday">mon</text><text x="56" y="165" class="weekday">wed</text><text x="56" y="199" class="weekday">fri</text>
   <text x="74" y="90" class="month">jul</text><text x="125" y="90" class="month">aug</text><text x="210" y="90" class="month">sep</text><text x="278" y="90" class="month">oct</text><text x="346" y="90" class="month">nov</text><text x="431" y="90" class="month">dec</text><text x="499" y="90" class="month">jan</text><text x="584" y="90" class="month">feb</text><text x="652" y="90" class="month">mar</text><text x="720" y="90" class="month">apr</text><text x="788" y="90" class="month">may</text><text x="873" y="90" class="month">jun</text><text x="941" y="90" class="month">jul</text>

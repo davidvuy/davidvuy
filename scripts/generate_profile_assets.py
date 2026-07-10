@@ -585,6 +585,20 @@ def render_trail(profile: dict[str, Any]) -> str:
     tag_end_x = 24 + tag_width
     tag_tip_x = tag_end_x + 14
     tag_stitch_end_x = tag_end_x - 10
+    barcode_x = tag_end_x - 38
+    barcode_y = 41
+    barcode = "".join(
+        f'<rect x="{barcode_x + offset}" y="{barcode_y}" width="{width}" height="30" class="{klass}"/>'
+        for offset, width, klass in [
+            (0, 2.2, "tag-bar-strong"),
+            (5, 1.4, "tag-bar-soft"),
+            (9, 3.0, "tag-bar-strong"),
+            (15, 1.6, "tag-bar-soft"),
+            (19, 2.4, "tag-bar-strong"),
+            (25, 1.2, "tag-bar-soft"),
+            (29, 3.4, "tag-bar-strong"),
+        ]
+    )
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Contribution trail">
   <style>
@@ -621,6 +635,8 @@ def render_trail(profile: dict[str, Any]) -> str:
     .tag-text {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .tag-accent {{ fill: #7ee787; }}
     .tag-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }}
+    .tag-bar-strong {{ fill: #f0f6fc; opacity: .7; }}
+    .tag-bar-soft {{ fill: #8b949e; opacity: .45; }}
     @keyframes bob {{ 0%, 100% {{ transform: rotate(0deg) translateY(0); }} 50% {{ transform: rotate(-6deg) translateY(-2px); }} }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
@@ -638,6 +654,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     <text x="62" y="46" class="tag-kicker">recent patch</text>
     <text x="62" y="63" class="tag-text">{html.escape(project_label)}</text>
     <text x="62" y="76" class="tag-kicker">{html.escape(streak_label)}</text>
+    {barcode}
   </g>
   {"".join(weekday_labels)}
   {"".join(month_labels)}
