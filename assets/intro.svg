@@ -56,6 +56,9 @@
     .cursor { fill: #f6e58d; opacity: .95; }
     .signature { fill: none; stroke: #c9d1d9; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .78; }
     .signature-dot { fill: #79c0ff; opacity: .9; }
+    .doodle-star { fill: none; stroke: #f0f6fc; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .88; }
+    .doodle-star-fill { fill: #f6e58d; opacity: .95; }
+    .doodle-star-dot { fill: #79c0ff; opacity: .88; }
     .button-thread { fill: none; stroke: #8b949e; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .78; }
     .button { fill: #111827; stroke: #8b949e; stroke-width: 1.4; }
     .button-ring { fill: none; stroke: #30363d; stroke-width: 1; opacity: .85; }
@@ -114,6 +117,12 @@
   <g class="orbit-spin">
     <ellipse cx="182" cy="110" rx="72" ry="28" class="orbit"/>
     <circle cx="254" cy="110" r="5" class="planet"/>
+  </g>
+  <g transform="translate(446 102) rotate(8)">
+    <path d="M 0 -14 L 0 14 M -14 0 L 14 0 M -10 -10 L 10 10 M 10 -10 L -10 10" class="doodle-star"/>
+    <path d="M 0 -6 L 4 0 L 0 6 L -4 0 Z" class="doodle-star-fill"/>
+    <circle cx="17" cy="-8" r="2.6" class="doodle-star-dot"/>
+    <circle cx="-13" cy="12" r="2.2" class="doodle-star-dot"/>
   </g>
   <g class="float">
     <rect x="930" y="82" width="132" height="132" rx="18" class="stamp-card"/>
