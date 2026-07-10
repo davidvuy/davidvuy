@@ -585,7 +585,8 @@ def render_trail(profile: dict[str, Any]) -> str:
     tag_end_x = 24 + tag_width
     tag_tip_x = tag_end_x + 14
     tag_stitch_end_x = tag_end_x - 10
-    barcode_x = tag_end_x - 38
+    stub_x = tag_end_x - 48
+    barcode_x = stub_x + 12
     barcode_y = 41
     barcode = "".join(
         f'<rect x="{barcode_x + offset}" y="{barcode_y}" width="{width}" height="30" class="{klass}"/>'
@@ -637,6 +638,8 @@ def render_trail(profile: dict[str, Any]) -> str:
     .tag-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }}
     .tag-bar-strong {{ fill: #f0f6fc; opacity: .7; }}
     .tag-bar-soft {{ fill: #8b949e; opacity: .45; }}
+    .tag-stub {{ fill: #0f1724; opacity: .92; }}
+    .tag-perf {{ fill: none; stroke: #8b949e; stroke-width: 1.1; stroke-linecap: round; stroke-dasharray: 1.2 4.2; opacity: .9; }}
     @keyframes bob {{ 0%, 100% {{ transform: rotate(0deg) translateY(0); }} 50% {{ transform: rotate(-6deg) translateY(-2px); }} }}
     @keyframes hop {{ 0%, 100% {{ transform: translateY(0); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
@@ -654,6 +657,8 @@ def render_trail(profile: dict[str, Any]) -> str:
     <text x="62" y="46" class="tag-kicker">recent patch</text>
     <text x="62" y="63" class="tag-text">{html.escape(project_label)}</text>
     <text x="62" y="76" class="tag-kicker">{html.escape(streak_label)}</text>
+    <rect x="{stub_x}" y="35" width="40" height="42" rx="10" class="tag-stub"/>
+    <path d="M {stub_x - 6} 39 V 73" class="tag-perf"/>
     {barcode}
   </g>
   {"".join(weekday_labels)}
