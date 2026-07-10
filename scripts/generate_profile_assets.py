@@ -546,6 +546,12 @@ def render_trail(profile: dict[str, Any]) -> str:
             f'<rect x="12" y="3" width="4" height="30" rx="2" class="spool-pin"/>'
             f'<path d="M 9 8 C 15 10, 19 14, 19 18 C 19 22, 15 26, 9 28" class="spool-wrap"/>'
             f'</g>'
+            f'<g transform="translate(66 {ty})">'
+            f'<path d="M 0 0 C 8 -8, 16 -8, 24 0 C 16 8, 8 8, 0 0 Z" class="bow-loop"/>'
+            f'<path d="M 8 0 C 14 5, 14 13, 10 19" class="bow-tail"/>'
+            f'<path d="M 16 0 C 22 5, 22 13, 18 19" class="bow-tail"/>'
+            f'<circle cx="12" cy="0" r="3.2" class="bow-knot"/>'
+            f'</g>'
         )
         path = (
             f'{spool}'
@@ -585,6 +591,9 @@ def render_trail(profile: dict[str, Any]) -> str:
     .spool-core {{ fill: #0d1117; opacity: .8; }}
     .spool-pin {{ fill: #f6e58d; opacity: .9; }}
     .spool-wrap {{ fill: none; stroke: #ff7b72; stroke-width: 2; stroke-linecap: round; opacity: .9; }}
+    .bow-loop {{ fill: none; stroke: #79c0ff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .82; }}
+    .bow-tail {{ fill: none; stroke: #79c0ff; stroke-width: 1.8; stroke-linecap: round; opacity: .72; stroke-dasharray: 2 5; }}
+    .bow-knot {{ fill: #f6e58d; stroke: #8b949e; stroke-width: 1; }}
     .spool {{ animation: bob 6s ease-in-out infinite; transform-origin: 14px 18px; }}
     .needle {{ animation: hop 1.9s ease-in-out infinite; }}
     .tag-string {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .72; }}
