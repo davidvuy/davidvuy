@@ -14,6 +14,7 @@
     .note-text { font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }
     .pill { fill: #111827; stroke: #30363d; }
     .pill-text { font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }
+    .pill-thread { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 2 6; opacity: .78; }
     .green { fill: #7ee787; }
     .blue { fill: #79c0ff; }
     .pink { fill: #ff7b72; }
@@ -126,7 +127,7 @@
   <path d="M 94 214 C 164 232, 255 230, 356 214 C 388 209, 408 207, 430 214" class="scribble"/>
   <text x="94" y="248" class="line">I make apps, playful interfaces, and useful experiments.</text>
   <text x="94" y="286" class="tiny">recent bits</text>
-  <g transform="translate(94 268)"><rect width="112" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" fill="#3178c6"/><text x="30" y="21" class="pill-text">care os</text></g><g transform="translate(218 268)"><rect width="185" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" fill="#f1e05a"/><text x="30" y="21" class="pill-text">mortydex explorer</text></g>
+  <g transform="translate(94 268)"><rect width="112" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" fill="#3178c6"/><text x="30" y="21" class="pill-text">care os</text><path d="M 32 25 H 92" class="pill-thread" stroke="#3178c6"/><circle cx="98" cy="25" r="2.4" fill="#3178c6" opacity=".9"/></g><g transform="translate(218 268)"><rect width="185" height="32" rx="16" class="pill"/><circle cx="16" cy="16" r="4" fill="#f1e05a"/><text x="30" y="21" class="pill-text">mortydex explorer</text><path d="M 32 25 H 165" class="pill-thread" stroke="#f1e05a"/><circle cx="171" cy="25" r="2.4" fill="#f1e05a" opacity=".9"/></g>
   <path d="M 760 172 C 790 158, 820 154, 850 160" class="wire"/>
   <path d="M 762 188 C 792 202, 822 206, 850 198" class="wire"/>
   <g transform="rotate(-7 848 244)">

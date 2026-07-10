@@ -219,6 +219,8 @@ def build_intro_pills(profile: dict[str, Any]) -> str:
             f'<rect width="{width}" height="32" rx="16" class="pill"/>'
             f'<circle cx="16" cy="16" r="4" fill="{dot_fill}"/>'
             f'<text x="30" y="21" class="pill-text">{label}</text>'
+            f'<path d="M 32 25 H {width - 20}" class="pill-thread" stroke="{dot_fill}"/>'
+            f'<circle cx="{width - 14}" cy="25" r="2.4" fill="{dot_fill}" opacity=".9"/>'
             f'</g>'
         )
         x += width + 12
@@ -306,6 +308,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     .note-text {{ font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2328; }}
     .pill {{ fill: #111827; stroke: #30363d; }}
     .pill-text {{ font: 700 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #c9d1d9; }}
+    .pill-thread {{ fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 2 6; opacity: .78; }}
     .green {{ fill: #7ee787; }}
     .blue {{ fill: #79c0ff; }}
     .pink {{ fill: #ff7b72; }}
