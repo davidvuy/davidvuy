@@ -12,19 +12,8 @@
   <img alt="Contribution trail" src="assets/trail.svg" width="100%">
 </p>
 
-## About
-
 I like turning loose ideas into something you can actually open, click, test, and improve.
 
 Mostly building with TypeScript, Python, React, Next.js, Node.js, SVG, CSS, APIs, and GitHub Actions.
-
-## Current Mood
-
-```txt
-build small
-make it real
-try it honestly
-keep the useful parts
-```
 
 <sub>This README updates its small visuals from public GitHub activity.</sub>
