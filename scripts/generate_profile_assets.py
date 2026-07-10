@@ -456,7 +456,9 @@ def render_trail(profile: dict[str, Any]) -> str:
     cells = []
     active_points: list[tuple[int, int]] = []
     month_labels: list[str] = []
+    weekday_labels: list[str] = []
     seen_months: set[str] = set()
+    weekday_markers = {1: "mon", 3: "wed", 5: "fri"}
     for index, day in enumerate(days):
         week = index // 7
         weekday = index % 7
@@ -464,6 +466,10 @@ def render_trail(profile: dict[str, Any]) -> str:
         level = 0 if count == 0 else min(4, 1 + int(count / max_count * 3.99))
         x = x0 + week * (cell + gap)
         y = y0 + weekday * (cell + gap)
+        if week == 0 and weekday in weekday_markers:
+            weekday_labels.append(
+                f'<text x="{x0 - 18}" y="{y + 10}" class="weekday">{weekday_markers[weekday]}</text>'
+            )
         cells.append(
             f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="3" fill="{colors[level]}"/>'
         )
@@ -528,6 +534,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     .title {{ font: 800 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .sub {{ font: 650 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }}
     .month {{ font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; }}
+    .weekday {{ font: 650 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; text-anchor: end; }}
     .trail {{ stroke: #7ee787; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .58; stroke-dasharray: 3 9; }}
     .lead-thread {{ fill: none; stroke: #ff7b72; stroke-width: 2.4; stroke-linecap: round; opacity: .72; stroke-dasharray: 2 8; }}
     .stitch {{ stroke: #79c0ff; stroke-width: 1.7; stroke-linecap: round; opacity: .9; }}
@@ -566,6 +573,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     <text x="62" y="63" class="tag-text">{html.escape(project_label)}</text>
     <text x="62" y="76" class="tag-kicker">{html.escape(streak_label)}</text>
   </g>
+  {"".join(weekday_labels)}
   {"".join(month_labels)}
   {"".join(cells)}
   {path}
