@@ -29,6 +29,8 @@
     .stamp-card { fill: #111827; stroke: #30363d; }
     .stamp-hole { fill: #0d1117; opacity: .95; }
     .stamp-title { font: 800 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.3px; fill: #f0f6fc; }
+    .stamp-value { font: 800 18px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .8px; fill: #f0f6fc; opacity: .9; text-anchor: end; }
+    .stamp-corner-line { fill: none; stroke: #30363d; stroke-width: 1.4; stroke-linecap: round; opacity: .9; }
     .stamp-line { stroke: #30363d; stroke-width: 2; stroke-linecap: round; }
     .stamp-wave { fill: none; stroke: #79c0ff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
     .plane-path { fill: none; stroke: #8b949e; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 4 10; opacity: .55; }
@@ -105,6 +107,8 @@
     <circle cx="944" cy="112" r="4" class="stamp-hole"/><circle cx="944" cy="128" r="4" class="stamp-hole"/><circle cx="944" cy="144" r="4" class="stamp-hole"/><circle cx="944" cy="160" r="4" class="stamp-hole"/><circle cx="944" cy="176" r="4" class="stamp-hole"/><circle cx="944" cy="192" r="4" class="stamp-hole"/>
     <circle cx="1048" cy="112" r="4" class="stamp-hole"/><circle cx="1048" cy="128" r="4" class="stamp-hole"/><circle cx="1048" cy="144" r="4" class="stamp-hole"/><circle cx="1048" cy="160" r="4" class="stamp-hole"/><circle cx="1048" cy="176" r="4" class="stamp-hole"/><circle cx="1048" cy="192" r="4" class="stamp-hole"/>
     <text x="956" y="118" class="stamp-title">BY HAND</text>
+    <text x="1038" y="118" class="stamp-value">01c</text>
+    <path d="M 1014 124 H 1038 V 148" class="stamp-corner-line"/>
     <path d="M 956 128 H 1038" class="stamp-line"/>
     <path d="M 960 168 C 974 148, 990 156, 1002 168 S 1028 188, 1038 160" class="stamp-wave"/>
     <circle cx="972" cy="150" r="5" class="green"/>
