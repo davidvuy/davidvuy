@@ -276,6 +276,16 @@ def trail_tagline(days: list[dict[str, Any]]) -> str:
     return "new streak soon"
 
 
+def trail_project_label(profile: dict[str, Any]) -> str:
+    owner = profile["owner"].lower()
+    for repo in profile["repos"]:
+        cleaned = clean_repo_name(repo["name"])
+        if cleaned.lower() == owner:
+            continue
+        return pretty_repo_label(cleaned, max_words=3, max_chars=18)
+    return "small useful things"
+
+
 def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
@@ -505,6 +515,11 @@ def render_trail(profile: dict[str, Any]) -> str:
         )
 
     streak_label = trail_tagline(days)
+    project_label = trail_project_label(profile)
+    tag_width = max(140, min(214, 42 + max(len(streak_label), len(project_label)) * 8))
+    tag_end_x = 24 + tag_width
+    tag_tip_x = tag_end_x + 14
+    tag_stitch_end_x = tag_end_x - 10
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Contribution trail">
   <style>
@@ -529,6 +544,7 @@ def render_trail(profile: dict[str, Any]) -> str:
     .tag-string {{ fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .72; }}
     .tag {{ fill: #111827; stroke: #30363d; stroke-width: 1.2; }}
     .tag-eyelet {{ fill: #0d1117; stroke: #8b949e; stroke-width: 1.2; }}
+    .tag-kicker {{ font: 700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; letter-spacing: 1.1px; text-transform: uppercase; }}
     .tag-text {{ font: 700 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }}
     .tag-accent {{ fill: #7ee787; }}
     .tag-stitch {{ fill: none; stroke: #8b949e; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1.5 5; opacity: .9; }}
@@ -540,13 +556,15 @@ def render_trail(profile: dict[str, Any]) -> str:
   <text x="74" y="48" class="title">contribution trail</text>
   <text x="74" y="72" class="sub">{profile["total_contributions"]} contributions this year. A tiny needle threads through the latest active days.</text>
   <g transform="translate(968 20) rotate(-4)">
-    <path d="M 20 0 C 18 14, 18 24, 24 33" class="tag-string"/>
-    <path d="M 24 33 L 132 33 L 146 49 L 132 65 L 24 65 Q 10 65 10 49 Q 10 33 24 33 Z" class="tag"/>
+    <path d="M 20 0 C 18 14, 18 24, 24 31" class="tag-string"/>
+    <path d="M 24 31 L {tag_end_x} 31 L {tag_tip_x} 56 L {tag_end_x} 81 L 24 81 Q 10 81 10 56 Q 10 31 24 31 Z" class="tag"/>
     <circle cx="28" cy="49" r="6" class="tag-eyelet"/>
     <circle cx="28" cy="49" r="2.5" class="bg"/>
-    <path d="M 42 49 H 126" class="tag-stitch"/>
+    <path d="M 42 49 H {tag_stitch_end_x}" class="tag-stitch"/>
     <circle cx="50" cy="49" r="4" class="tag-accent"/>
-    <text x="62" y="54" class="tag-text">{html.escape(streak_label)}</text>
+    <text x="62" y="46" class="tag-kicker">recent patch</text>
+    <text x="62" y="63" class="tag-text">{html.escape(project_label)}</text>
+    <text x="62" y="76" class="tag-kicker">{html.escape(streak_label)}</text>
   </g>
   {"".join(month_labels)}
   {"".join(cells)}
