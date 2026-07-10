@@ -2,6 +2,8 @@
   <style>
     :root { color-scheme: dark; }
     .bg { fill: #0d1117; }
+    .panel { fill: #161b22; stroke: #30363d; stroke-width: 1.2; }
+    .panel-stitch { fill: none; stroke: #8b949e; stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 1.5 5.5; opacity: .7; }
     .title { font: 800 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }
     .sub { font: 650 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8b949e; }
     .month { font: 650 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6e7681; }
@@ -42,6 +44,9 @@
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   </style>
   <rect class="bg" width="1200" height="260"/>
+  <rect x="42" y="18" width="1116" height="210" rx="18" class="panel"/>
+  <path d="M 66 42 C 66 28, 76 20, 90 20" class="panel-stitch"/>
+  <path d="M 1092 226 C 1110 226, 1124 214, 1124 196" class="panel-stitch"/>
   <text x="74" y="48" class="title">contribution trail</text>
   <text x="74" y="72" class="sub">356 contributions this year. A tiny needle threads through the latest active days.</text>
   <g transform="translate(968 20) rotate(-4)">
