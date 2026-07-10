@@ -376,6 +376,11 @@ def render_intro(profile: dict[str, Any]) -> str:
     .cursor {{ fill: #f6e58d; opacity: .95; }}
     .signature {{ fill: none; stroke: #c9d1d9; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .78; }}
     .signature-dot {{ fill: #79c0ff; opacity: .9; }}
+    .button-thread {{ fill: none; stroke: #8b949e; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .78; }}
+    .button {{ fill: #111827; stroke: #8b949e; stroke-width: 1.4; }}
+    .button-ring {{ fill: none; stroke: #30363d; stroke-width: 1; opacity: .85; }}
+    .button-hole {{ fill: #f0f6fc; opacity: .9; }}
+    .button-stitch {{ fill: none; stroke: #79c0ff; stroke-width: 1.2; stroke-linecap: round; opacity: .8; }}
     .blink {{ animation: blink 1.7s steps(2) infinite; }}
     .float {{ animation: float 4.5s ease-in-out infinite; }}
     .orbit-spin {{ animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }}
@@ -473,6 +478,18 @@ def render_intro(profile: dict[str, Any]) -> str:
   {intro_pills}
   <path d="M 760 172 C 790 158, 820 154, 850 160" class="wire"/>
   <path d="M 762 188 C 792 202, 822 206, 850 198" class="wire"/>
+  <g transform="translate(752 180) rotate(-12)">
+    <path d="M 0 0 C 10 14, 20 26, 31 38" class="button-thread"/>
+    <g transform="translate(31 38)">
+      <circle cx="0" cy="0" r="13" class="button"/>
+      <circle cx="0" cy="0" r="9" class="button-ring"/>
+      <circle cx="-4" cy="-4" r="1.7" class="button-hole"/>
+      <circle cx="4" cy="-4" r="1.7" class="button-hole"/>
+      <circle cx="-4" cy="4" r="1.7" class="button-hole"/>
+      <circle cx="4" cy="4" r="1.7" class="button-hole"/>
+      <path d="M -4 -4 L 4 4 M 4 -4 L -4 4" class="button-stitch"/>
+    </g>
+  </g>
   <g transform="rotate(-7 848 244)">
     <rect x="796" y="218" width="118" height="68" rx="8" class="note-shadow"/>
     <rect x="792" y="214" width="118" height="68" rx="8" class="note"/>
