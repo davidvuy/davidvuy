@@ -263,6 +263,33 @@ def build_intro_note_tab(profile: dict[str, Any]) -> tuple[str, str, int]:
     return ("NEW", "#79c0ff", 34)
 
 
+def build_intro_mini_tag_text(profile: dict[str, Any]) -> str:
+    owner = profile["owner"].lower()
+    language_phrases = {
+        "typescript": "ts tinkering",
+        "javascript": "js doodles",
+        "python": "py scripts",
+        "react": "ui poking",
+        "next.js": "next patches",
+        "css": "css play",
+        "html": "html scraps",
+        "go": "go building",
+        "rust": "rust sparks",
+    }
+    for repo in profile["repos"]:
+        cleaned = clean_repo_name(repo["name"])
+        if cleaned.lower() == owner:
+            continue
+        language = (repo.get("language") or "").strip().lower()
+        if language in language_phrases:
+            return language_phrases[language]
+
+        label = pretty_repo_label(cleaned, max_words=2, max_chars=14)
+        if label:
+            return f"on {label}"
+    return "build small"
+
+
 def build_postmark_text(profile: dict[str, Any]) -> tuple[str, str]:
     generated_at = profile.get("generated_at")
     if isinstance(generated_at, str):
@@ -317,6 +344,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     intro_pills = build_intro_pills(profile)
     note_top, note_bottom = build_intro_note(profile)
     note_tab_text, note_tab_fill, note_tab_width = build_intro_note_tab(profile)
+    mini_tag_text = build_intro_mini_tag_text(profile)
     postmark_top, postmark_bottom = build_postmark_text(profile)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="David Vuy intro">
   <style>
@@ -467,7 +495,7 @@ def render_intro(profile: dict[str, Any]) -> str:
     <circle cx="44" cy="54" r="4" class="mini-tag-accent"/>
     <path d="M 38 60 H 130" class="mini-tag-stitch"/>
     <text x="54" y="52" class="mini-tag-kicker">current note</text>
-    <text x="54" y="68" class="mini-tag-text">build small</text>
+    <text x="54" y="68" class="mini-tag-text">{html.escape(mini_tag_text)}</text>
   </g>
   <g class="float">
     <rect x="930" y="82" width="132" height="132" rx="18" class="stamp-card"/>

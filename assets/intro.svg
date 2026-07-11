@@ -147,7 +147,7 @@
     <circle cx="44" cy="54" r="4" class="mini-tag-accent"/>
     <path d="M 38 60 H 130" class="mini-tag-stitch"/>
     <text x="54" y="52" class="mini-tag-kicker">current note</text>
-    <text x="54" y="68" class="mini-tag-text">build small</text>
+    <text x="54" y="68" class="mini-tag-text">ts tinkering</text>
   </g>
   <g class="float">
     <rect x="930" y="82" width="132" height="132" rx="18" class="stamp-card"/>
