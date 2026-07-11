@@ -71,6 +71,9 @@
     .mini-tag-text { font: 800 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #f0f6fc; }
     .mini-tag-accent { fill: #79c0ff; opacity: .9; }
     .mini-tag-stitch { fill: none; stroke: #30363d; stroke-width: 1.1; stroke-linecap: round; stroke-dasharray: 1.5 4; opacity: .95; }
+    .mini-tag-charm-ring { fill: none; stroke: #f0f6fc; stroke-width: 1.2; opacity: .82; }
+    .mini-tag-charm-star { fill: #f6e58d; stroke: #8b949e; stroke-width: 1; stroke-linejoin: round; }
+    .mini-tag-charm-dot { fill: #79c0ff; opacity: .92; }
     .blink { animation: blink 1.7s steps(2) infinite; }
     .float { animation: float 4.5s ease-in-out infinite; }
     .orbit-spin { animation: orbit-spin 9s linear infinite; transform-origin: 182px 110px; }
@@ -133,6 +136,11 @@
   </g>
   <g transform="translate(508 92) rotate(-6)">
     <path d="M 16 0 C 14 18, 14 30, 20 40" class="mini-tag-string"/>
+    <g transform="translate(10 18) rotate(-12)">
+      <circle cx="0" cy="0" r="4.5" class="mini-tag-charm-ring"/>
+      <path d="M 0 -8 L 2.3 -2.4 L 8.4 -2.1 L 3.6 1.8 L 5.2 7.7 L 0 4.5 L -5.2 7.7 L -3.6 1.8 L -8.4 -2.1 L -2.3 -2.4 Z" class="mini-tag-charm-star"/>
+      <circle cx="8.8" cy="-5.8" r="1.6" class="mini-tag-charm-dot"/>
+    </g>
     <path d="M 20 40 L 136 40 L 150 60 L 136 80 L 20 80 Q 8 80 8 60 Q 8 40 20 40 Z" class="mini-tag"/>
     <circle cx="24" cy="60" r="5.5" class="mini-tag-eyelet"/>
     <circle cx="24" cy="60" r="2.2" class="bg"/>
