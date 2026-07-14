@@ -407,6 +407,10 @@ def render_intro(profile: dict[str, Any]) -> str:
     .doodle-star {{ fill: none; stroke: #f0f6fc; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .88; }}
     .doodle-star-fill {{ fill: #f6e58d; opacity: .95; }}
     .doodle-star-dot {{ fill: #79c0ff; opacity: .88; }}
+    .city-road {{ fill: none; stroke: #8b949e; stroke-width: 5.5; stroke-linecap: round; opacity: .72; }}
+    .city-lane {{ fill: none; stroke: #f0f6fc; stroke-width: 1; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .58; }}
+    .city-island {{ fill: #173b25; stroke: #7ee787; stroke-width: 1.8; }}
+    .city-zone {{ stroke: #0d1117; stroke-width: 1; }}
     .button-thread {{ fill: none; stroke: #8b949e; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 2 5; opacity: .78; }}
     .button {{ fill: #111827; stroke: #8b949e; stroke-width: 1.4; }}
     .button-ring {{ fill: none; stroke: #30363d; stroke-width: 1; opacity: .85; }}
@@ -481,6 +485,16 @@ def render_intro(profile: dict[str, Any]) -> str:
     <path d="M 0 -6 L 4 0 L 0 6 L -4 0 Z" class="doodle-star-fill"/>
     <circle cx="17" cy="-8" r="2.6" class="doodle-star-dot"/>
     <circle cx="-13" cy="12" r="2.2" class="doodle-star-dot"/>
+  </g>
+  <g transform="translate(710 112) rotate(-6)">
+    <path d="M -36 0 H -16 M 16 0 H 36 M 0 -32 V -16 M 0 16 V 32" class="city-road"/>
+    <circle r="16" class="city-road"/>
+    <path d="M -36 0 H -16 M 16 0 H 36 M 0 -32 V -16 M 0 16 V 32" class="city-lane"/>
+    <circle r="16" class="city-lane"/>
+    <circle r="8" class="city-island"/>
+    <rect x="-31" y="-25" width="8" height="8" rx="2" class="city-zone" fill="#79c0ff"/>
+    <rect x="23" y="18" width="8" height="8" rx="2" class="city-zone" fill="#f6e58d"/>
+    <rect x="20" y="-27" width="7" height="7" rx="2" class="city-zone" fill="#ff7b72"/>
   </g>
   <g transform="translate(508 92) rotate(-6)">
     <path d="M 16 0 C 14 18, 14 30, 20 40" class="mini-tag-string"/>
